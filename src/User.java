@@ -6,7 +6,7 @@ public class User extends Node{
 	private String domain;
 	private String email;
 	private String role;
-	private HashMap<String, Date> hash;
+	private HashMap<String, Date> hash_table;
 	
 	public User(String name, String id, String domain, String email, String role) {
 		super(id);
@@ -14,14 +14,16 @@ public class User extends Node{
 		this.domain = domain;
 		this.email = email;
 		this.role = role;
-		hash = null;
+		hash_table = null;
 	}
 	
 	public void addDate(String key, Date date) {
-		if(hash ==  null) {
-			hash = new HashMap<>();
+		if(hash_table ==  null) {
+			hash_table = new HashMap<>();
 		}else {
-			hash.put(key, date);
+			if(hash_table.get(key) ==  null){
+				hash_table.put(key, date);
+			}
 		}
 	}
 
@@ -58,11 +60,11 @@ public class User extends Node{
 	}
 
 	public HashMap<String, Date> getHash() {
-		return hash;
+		return hash_table;
 	}
 
 	public void setHash(HashMap<String, Date> hash) {
-		this.hash = hash;
+		this.hash_table = hash;
 	}
 	
 	

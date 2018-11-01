@@ -16,6 +16,25 @@ public class Tree_insiders {
 		}
 	}
 	
+	public void insertDate(Date date){
+		User user = null;
+		user = hash_user.get(date.getUser());
+		if(user != null){
+			user.addDate(date.getId(), date);
+		}
+	}
+	
+	public void insertDevice(Device device){
+		User user = null;
+		user = hash_user.get(device.getUser());
+		if(user != null){
+			Date date = user.getHash().get(device.getDate());
+			if(date != null){
+				date.addDevice(device.getId(), device);
+			}
+		}
+	}
+	
 	public int getUserSize() {
 		if(hash_user != null) {
 			return hash_user.size();
