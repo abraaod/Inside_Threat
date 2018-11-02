@@ -11,6 +11,7 @@ public class Tree_insiders {
 	public void insertUser(User user) {
 		if(hash_user == null) {
 			hash_user = new HashMap<>();
+			hash_user.put(user.getId(), user);
 		} else {
 			hash_user.put(user.getId(), user);
 		}
@@ -20,7 +21,7 @@ public class Tree_insiders {
 		User user = null;
 		user = hash_user.get(date.getUser());
 		if(user != null){
-			user.addDate(date.getId(), date);
+			user.addDate(date);
 		}
 	}
 	
@@ -28,7 +29,7 @@ public class Tree_insiders {
 		User user = null;
 		user = hash_user.get(device.getUser());
 		if(user != null){
-			Date date = user.getHash().get(device.getDate());
+			Date date = user.getDate();
 			if(date != null){
 				date.addDevice(device.getId(), device);
 			}
