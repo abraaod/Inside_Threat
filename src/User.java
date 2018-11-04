@@ -6,7 +6,9 @@ public class User extends Node{
 	private String domain;
 	private String email;
 	private String role;
-	private HashMap<String, Date> hash;
+	private Date date;
+	private String start_date;
+	private String end_date;
 	
 	public User(String name, String id, String domain, String email, String role) {
 		super(id);
@@ -14,14 +16,31 @@ public class User extends Node{
 		this.domain = domain;
 		this.email = email;
 		this.role = role;
-		hash = null;
+		date = null;
+		start_date = null;
+		end_date = null;
 	}
 	
-	public void addDate(String key, Date date) {
-		if(hash ==  null) {
-			hash = new HashMap<>();
-		}else {
-			hash.put(key, date);
+	public User(String name, String id, String domain, String email, String role, String start_date, String end_date) {
+		super(id);
+		this.name = name;
+		this.domain = domain;
+		this.email = email;
+		this.role = role;
+		date = null;
+		this.start_date = start_date;
+		this.end_date = end_date;
+	}
+	
+	public void addDate(Date date) {
+		if(start_date == null && end_date == null) {
+			if(this.date == null) {
+				this.date = new Date("aggregate", getId());
+			}
+		} else {
+			if(this.date == null) {
+				this.date = new Date(start_date + "-" + end_date, getId());
+			}
 		}
 	}
 
@@ -57,13 +76,30 @@ public class User extends Node{
 		this.role = role;
 	}
 
-	public HashMap<String, Date> getHash() {
-		return hash;
+	public Date getDate() {
+		return date;
 	}
 
-	public void setHash(HashMap<String, Date> hash) {
-		this.hash = hash;
+	public void setDate(Date date) {
+		this.date = date;
 	}
+
+	public String getStart_date() {
+		return start_date;
+	}
+
+	public void setStart_date(String start_date) {
+		this.start_date = start_date;
+	}
+
+	public String getEnd_date() {
+		return end_date;
+	}
+
+	public void setEnd_date(String end_date) {
+		this.end_date = end_date;
+	}
+
 	
 	
 }
