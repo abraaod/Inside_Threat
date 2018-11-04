@@ -38,7 +38,7 @@ public class Tree_insiders {
 		User user = hash_user.get(logon.getUser());
 		Date date = user.getDate();
 		if(date != null) {
-			if(date.insideInterval(logon.getDate())) {
+			if(date.insideInterval(logon.getDate()) || date.getId().equals("aggregate")) {
 				Device device = user.getDate().getHash_table().get(logon.getDevice());
 				if(device != null) {
 					device.addLogon(logon.getId(), logon);
@@ -51,7 +51,7 @@ public class Tree_insiders {
 		User user = hash_user.get(http.getUser());
 		Date date = user.getDate();
 		if(date != null) {
-			if(date.insideInterval(http.getDate())) {
+			if(date.insideInterval(http.getDate()) || date.getId().equals("aggregate")) {
 				Device device = user.getDate().getHash_table().get(http.getDevice());
 				if(device != null) {
 					device.addHttp(http.getId(), http);
@@ -64,7 +64,7 @@ public class Tree_insiders {
 		User user = hash_user.get(input.getUser());
 		Date date = user.getDate();
 		if(date != null) {
-			if(date.insideInterval(input.getDate())) {
+			if(date.insideInterval(input.getDate()) || date.getId().equals("aggregate")) {
 				Device device = user.getDate().getHash_table().get(input.getDevice());
 				if(device != null) {
 					device.addInput(input.getId(), input);
