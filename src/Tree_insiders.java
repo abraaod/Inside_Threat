@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.Set;
 
 public class Tree_insiders {
 	
@@ -38,7 +39,12 @@ public class Tree_insiders {
 		User user = hash_user.get(logon.getUser());
 		Date date = user.getDate();
 		if(date != null) {
-			if(date.insideInterval(logon.getDate()) || date.getId().equals("aggregate")) {
+			if(date.getId().equals("aggregate")) {
+				Device device = user.getDate().getHash_table().get(logon.getDevice());
+				if(device != null) {
+					device.addLogon(logon.getId(), logon);
+				}
+			} else if(date.insideInterval(logon.getDate())) {
 				Device device = user.getDate().getHash_table().get(logon.getDevice());
 				if(device != null) {
 					device.addLogon(logon.getId(), logon);
@@ -51,7 +57,12 @@ public class Tree_insiders {
 		User user = hash_user.get(http.getUser());
 		Date date = user.getDate();
 		if(date != null) {
-			if(date.insideInterval(http.getDate()) || date.getId().equals("aggregate")) {
+			if(date.getId().equals("aggregate")) {
+				Device device = user.getDate().getHash_table().get(http.getDevice());
+				if(device != null) {
+					device.addHttp(http.getId(), http);
+				}
+			} else if(date.insideInterval(http.getDate())) {
 				Device device = user.getDate().getHash_table().get(http.getDevice());
 				if(device != null) {
 					device.addHttp(http.getId(), http);
@@ -64,7 +75,12 @@ public class Tree_insiders {
 		User user = hash_user.get(input.getUser());
 		Date date = user.getDate();
 		if(date != null) {
-			if(date.insideInterval(input.getDate()) || date.getId().equals("aggregate")) {
+			if(date.getId().equals("aggregate")) {
+				Device device = user.getDate().getHash_table().get(input.getDevice());
+				if(device != null) {
+					device.addInput(input.getId(), input);
+				}
+			} else if(date.insideInterval(input.getDate())) {
 				Device device = user.getDate().getHash_table().get(input.getDevice());
 				if(device != null) {
 					device.addInput(input.getId(), input);
@@ -73,10 +89,12 @@ public class Tree_insiders {
 		}
 	}
 	
-	public int getUserSize() {
-		if(hash_user != null) {
-			return hash_user.size();
+	public String users() {
+		String exit = "";
+		Set<String> chaves = hash_user.keySet();
+		for( String f : chaves) {
+			exit = f + ":" + hash_user.get(f).getDate() + "\n";
 		}
-		return 0;
+		return exit;
 	}
 }
