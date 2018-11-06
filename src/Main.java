@@ -11,7 +11,7 @@ public class Main {
 		System.out.println("terminou ldap e começou device");
 		file.read_device(tree, "../data/device.csv");
 		System.out.println("terminou device e começou http");
-		//file.read_http(tree, "../data/http.csv");
+		file.read_http(tree, "../data/http.csv");
 		System.out.println("terminou http e começou logon");
 		file.read_logon(tree, "../data/logon.csv");
 		System.out.println("terminou de ler tudo");

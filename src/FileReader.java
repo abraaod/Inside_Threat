@@ -2,6 +2,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
+import java.io.*;
 
 public class FileReader {
 
@@ -86,18 +87,19 @@ public class FileReader {
 
 	public void read_http(Tree_insiders tree, String FileName) {
 		FileInputStream file = null;
-		Scanner sc = null;
+		//Scanner sc = null;
 		try {
 			file = new FileInputStream(FileName);
-			sc = new Scanner(file, "UTF-8");
+			BufferedReader br = new BufferedReader(new InputStreamReader(file));
+			
 
 			// jump first line
-			if (sc.hasNextLine()) {
-				sc.nextLine();
-			}
+			br.readLine();
 
-			while (sc.hasNextLine()) {
-				String text = sc.nextLine();
+			String sNull = null;
+
+			while ( (sNull = br.readLine() ) != null) {
+				String text = br.readLine();
 				String [] spliter = text.split(",");
 				String [] date_id = spliter[1].split(" ");
 				String [] user_id = spliter[2].split("/");
@@ -110,7 +112,10 @@ public class FileReader {
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-		} finally {
+		} catch(IOException e1){
+			e1.printStackTrace();
+
+		}finally {
 			if (file != null) {
 				try {
 					file.close();
@@ -118,26 +123,25 @@ public class FileReader {
 					e.printStackTrace();
 				}
 			}
-			if (sc != null) {
-				sc.close();
-			}
 		}
 	}
 
 	public void read_logon(Tree_insiders tree, String FileName) {
 		FileInputStream file = null;
-		Scanner sc = null;
+		//Scanner sc = null;
 		try {
 			file = new FileInputStream(FileName);
-			sc = new Scanner(file, "UTF-8");
+			BufferedReader br = new BufferedReader(new InputStreamReader(file));
+			//sc = new Scanner(file, "UTF-8");
 
 			// jump first line
-			if (sc.hasNextLine()) {
-				sc.nextLine();
-			}
+			br.readLine();
+			
 
-			while (sc.hasNextLine()) {
-				String text = sc.nextLine();
+			String sNull = null;
+
+			while ((sNull = br.readLine() ) == null) {
+				String text = br.readLine();
 				String [] spliter = text.split(",");
 				String [] date_id = spliter[1].split(" ");
 				String [] user_id = spliter[2].split("/");
@@ -150,16 +154,15 @@ public class FileReader {
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-		} finally {
+		} catch (IOException e1){
+			e1.printStackTrace();
+		}finally {
 			if (file != null) {
 				try {
 					file.close();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-			}
-			if (sc != null) {
-				sc.close();
 			}
 		}
 	}
