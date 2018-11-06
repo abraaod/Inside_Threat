@@ -1,10 +1,9 @@
 
-public class Http extends Node {
+public class Logoff extends Node{
 
-	public Http(String id) {
+	public Logoff(String id) {
 		super(id);
 		// TODO Auto-generated constructor stub
 	}
-	
 	
 }

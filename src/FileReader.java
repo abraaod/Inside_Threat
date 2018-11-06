@@ -43,7 +43,7 @@ public class FileReader {
 
 	}
 
-	public void read_device(Tree_insiders tree, String FileName) {
+	public void read_input(Tree_insiders tree, String FileName) {
 
 		FileInputStream file = null;
 		Scanner sc = null;
@@ -60,13 +60,17 @@ public class FileReader {
 				String text = sc.nextLine();
 				String[] spliter = text.split(",");
 				String[] date_id = spliter[1].split(" ");
+				String hours = date_id[1];
 				String[] user_id = spliter[2].split("/");
 				Date date = new Date(date_id[0], user_id[1]);
 				tree.insertDate(date);
 				Device device = new Device(spliter[3], user_id[1], date_id[0]);
 				tree.insertDevice(device);
-				Input input = new Input(spliter[0], date_id[0], date_id[1], user_id[1], device.getId(), spliter[4]);
-				tree.insertInput(input);
+				if(spliter[4].equalsIgnoreCase("connect")) {
+					tree.insertConnect(device, hours);
+				}else {
+					tree.insertDisconnect(device, hours);
+				}
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -99,7 +103,7 @@ public class FileReader {
 			String sNull = null;
 
 			while ( (sNull = br.readLine() ) != null) {
-				String text = br.readLine();
+				String text = sNull;
 				String [] spliter = text.split(",");
 				String [] date_id = spliter[1].split(" ");
 				String [] user_id = spliter[2].split("/");
@@ -107,8 +111,7 @@ public class FileReader {
 				tree.insertDate(date);
 				Device device = new Device(spliter[3], user_id[1], date_id[0]);
 				tree.insertDevice(device);
-				Http http = new Http(spliter[0], date_id[0], date_id[1], user_id[1], device.getId(), spliter[4]);
-				tree.insertHttp(http);
+				
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -149,8 +152,7 @@ public class FileReader {
 				tree.insertDate(date);
 				Device device = new Device(spliter[3], user_id[1], date_id[0]);
 				tree.insertDevice(device);
-				Logon logon = new Logon(spliter[0], date_id[0], date_id[1], user_id[1], device.getId(), spliter[4]);
-				tree.insertLogon(logon);
+				
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

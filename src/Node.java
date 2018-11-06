@@ -27,5 +27,8 @@ public class Node{
 		this.hist = hist;
 	}
 	
+	public void updateHist(int pos) {
+		hist[pos]++;
+	}
 	
 }
