@@ -1,3 +1,5 @@
+package dominio;
+
 
 public class Input extends Activity{
 	

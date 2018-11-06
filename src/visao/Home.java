@@ -5,10 +5,11 @@
  */
 package visao;
 
+import dominio.FileReader;
+import dominio.Tree_insiders;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -24,6 +25,8 @@ import javax.swing.JOptionPane;
 public class Home extends javax.swing.JFrame {
 
     File[] files;
+    Tree_insiders tree;
+    FileReader filereader;
     boolean data_esp = false;
 
     /**
@@ -31,6 +34,7 @@ public class Home extends javax.swing.JFrame {
      */
     public Home() {
         initComponents();
+        tree = new Tree_insiders();
     }
 
     /**
@@ -287,7 +291,7 @@ public class Home extends javax.swing.JFrame {
 
     private void btnGerarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGerarMouseClicked
         try {
-
+            
             if (files.length == 4 && files != null) {
 
                 if (rbPeriodo.isSelected()) {
@@ -297,8 +301,8 @@ public class Home extends javax.swing.JFrame {
                         
                         for( File f : files ){
                             if(f.getName().contains("LDAP.csv")){
-                                // Do something.
-                            }     
+                                filereader.read(tree, f);
+                            }
                         }
                         
                         for( File f : files ){
@@ -383,21 +387,21 @@ public class Home extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_rbDataItemStateChanged
 
-    private ArrayList<String> readFileAsList(File file) throws IOException {
-        final ArrayList<String> tes = new ArrayList<String>();
-        final BufferedReader br = new BufferedReader(new FileReader(file));
-        try {
-            String line;
-            while ((line = br.readLine()) != null) {
-                tes.add(line);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            br.close();
-        }
-        return tes;
-    }
+//    private ArrayList<String> readFileAsList(File file) throws IOException {
+//        final ArrayList<String> tes = new ArrayList<String>();
+//        final BufferedReader br = new BufferedReader(new FileReader(file));
+//        try {
+//            String line;
+//            while ((line = br.readLine()) != null) {
+//                tes.add(line);
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        } finally {
+//            br.close();
+//        }
+//        return tes;
+//    }
 
     /**
      * @param args the command line arguments

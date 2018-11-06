@@ -1,3 +1,5 @@
+package dominio;
+
 import java.util.HashMap;
 
 public class Device extends Node {

@@ -1,3 +1,5 @@
+package dominio;
+
 
 public class Logon extends Activity{
 	
