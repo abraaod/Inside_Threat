@@ -1,5 +1,4 @@
 package dominio;
-
 import java.util.HashMap;
 
 public class User extends Node{

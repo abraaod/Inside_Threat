@@ -1,23 +1,9 @@
 package dominio;
+public class Logon extends Node {
 
-
-public class Logon extends Activity{
-	
-	
-	String activity;
-	
-	public Logon(String id, String date, String hour, String user, String device, String activity) {
-		super(id, date, hour, user, device);
-		this.activity = activity;
+	public Logon(String id) {
+		super(id);
+		// TODO Auto-generated constructor stub
 	}
 
-	public String getActivity() {
-		return activity;
-	}
-
-	public void setActivity(String activity) {
-		this.activity = activity;
-	}
-	
-	
 }

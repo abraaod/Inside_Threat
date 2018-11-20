@@ -301,25 +301,25 @@ public class Home extends javax.swing.JFrame {
                         
                         for( File f : files ){
                             if(f.getName().contains("LDAP.csv")){
-                                filereader.read(tree, f);
+                                filereader.read_ldap(tree, f);
                             }
                         }
                         
                         for( File f : files ){
                             if(f.getName().contains("device.csv")){
-                                // Do something.
+                                filereader.read_input(tree, f);
                             }     
                         }
                         
                         for( File f : files ){
                             if(f.getName().contains("http.csv")){
-                                // Do something.
+                                filereader.read_http(tree, f);
                             }     
                         }
                         
                         for( File f : files ){
                             if(f.getName().contains("logon.csv")){
-                                // Do something.
+                                filereader.read_logon(tree, f);
                             }     
                         }
 
@@ -333,29 +333,32 @@ public class Home extends javax.swing.JFrame {
 
                         for( File f : files ){
                             if(f.getName().contains("LDAP.csv")){
-                                // Do something.
+                                filereader.read_ldap(tree, f);
                             }     
                         }
                         
                         for( File f : files ){
                             if(f.getName().contains("device.csv")){
-                                // Do something.
+                                filereader.read_input(tree, f);
                             }     
                         }
                         
                         for( File f : files ){
                             if(f.getName().contains("http.csv")){
-                                // Do something.
+                                filereader.read_http(tree, f);
                             }     
                         }
                         
                         for( File f : files ){
                             if(f.getName().contains("logon.csv")){
-                                // Do something.
+                                filereader.read_logon(tree, f);
                             }     
                         }
                     }
                 }
+                
+                System.out.println("Terminou de ler tudo!");
+                tree.users();
 
             } else {
                 if (files.length < 4 || files == null) {

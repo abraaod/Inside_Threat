@@ -1,18 +1,20 @@
 package dominio;
-
-
 public class Main {
 	
 	public static void main(String[] args) throws InterruptedException {
 		
-//		long beforeUsedMem=Runtime.getRuntime().totalMemory()-Runtime.getRuntime().freeMemory();
-//		Tree_insiders tree = new Tree_insiders();
-//		FileReader file = new FileReader();
-//		file.read(tree, "data/ldap.csv");
-//		System.out.println(tree.getUserSize());
-//		Thread.sleep(10000);
-//		long afterUsedMem=Runtime.getRuntime().totalMemory()-Runtime.getRuntime().freeMemory();
-//		long actual = afterUsedMem - beforeUsedMem;
-//		System.out.println(actual/1024);
+		/*long beforeUsedMem=Runtime.getRuntime().totalMemory()-Runtime.getRuntime().freeMemory();
+		Tree_insiders tree = new Tree_insiders();
+		FileReader file = new FileReader();
+		System.out.println("começo ldap");
+		file.read_ldap(tree, "data/ldap.csv");
+		System.out.println("terminou ldap e começou device");
+		file.read_input(tree, "data/device.csv");
+		System.out.println("terminou device e começou http");
+		file.read_http(tree, "data/http.csv");
+		System.out.println("terminou http e começou logon");
+		file.read_logon(tree, "data/logon.csv");
+		System.out.println("terminou de ler tudo");
+		tree.users();*/
 	}
 }

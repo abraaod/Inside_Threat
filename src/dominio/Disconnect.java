@@ -1,10 +1,9 @@
 package dominio;
-public class Http extends Node {
+public class Disconnect extends Node{
 
-	public Http(String id) {
+	public Disconnect(String id) {
 		super(id);
 		// TODO Auto-generated constructor stub
 	}
-	
-	
+
 }

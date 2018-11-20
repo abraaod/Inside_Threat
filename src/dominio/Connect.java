@@ -1,10 +1,9 @@
 package dominio;
-public class Http extends Node {
+public class Connect extends Node{
 
-	public Http(String id) {
+	public Connect(String id) {
 		super(id);
 		// TODO Auto-generated constructor stub
 	}
-	
-	
+
 }
