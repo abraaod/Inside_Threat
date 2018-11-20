@@ -170,5 +170,6 @@ public class Tree_insiders {
 			User aux = users.next();
 			System.out.println(aux.getId());
 		}
+		System.out.println(lista.size());
 	}
 }

@@ -1,6 +1,3 @@
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Scanner;
 import java.io.*;
 
@@ -9,18 +6,18 @@ public class FileReader {
 	public void read_ldap(Tree_insiders tree, String FileName) {
 
 		FileInputStream file = null;
-		Scanner sc = null;
+		BufferedReader br = null;
 		try {
 			file = new FileInputStream(FileName);
-			sc = new Scanner(file, "UTF-8");
+			br = new BufferedReader(new InputStreamReader(file));
 
 			// jump first line
-			if (sc.hasNextLine()) {
-				sc.nextLine();
-			}
+			br.readLine();
+			
+			String sNull = null;
 
-			while (sc.hasNextLine()) {
-				String text = sc.nextLine();
+			while ((sNull = br.readLine()) != null) {
+				String text = sNull;
 				String[] spliter = text.split(",");
 				User user = new User(spliter[0], spliter[1], spliter[2], spliter[3], spliter[4]);
 				tree.insertUser(user);
@@ -28,16 +25,16 @@ public class FileReader {
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		} finally {
 			if (file != null) {
 				try {
 					file.close();
+					br.close();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-			}
-			if (sc != null) {
-				sc.close();
 			}
 		}
 
@@ -46,18 +43,17 @@ public class FileReader {
 	public void read_input(Tree_insiders tree, String FileName) {
 
 		FileInputStream file = null;
-		Scanner sc = null;
+		BufferedReader br = null;
 		try {
 			file = new FileInputStream(FileName);
-			sc = new Scanner(file, "UTF-8");
+			br = new BufferedReader(new InputStreamReader(file));
 
 			// jump first line
-			if (sc.hasNextLine()) {
-				sc.nextLine();
-			}
-
-			while (sc.hasNextLine()) {
-				String text = sc.nextLine();
+			br.readLine();
+			
+			String sNull = null;
+			while ((sNull = br.readLine()) != null) {
+				String text = sNull;
 				String[] spliter = text.split(",");
 				String[] date_id = spliter[1].split(" ");
 				String hours = date_id[1];
@@ -74,16 +70,16 @@ public class FileReader {
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		} finally {
 			if (file != null) {
 				try {
 					file.close();
+					br.close();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-			}
-			if (sc != null) {
-				sc.close();
 			}
 		}
 
@@ -91,10 +87,11 @@ public class FileReader {
 
 	public void read_http(Tree_insiders tree, String FileName) {
 		FileInputStream file = null;
+		BufferedReader br = null;
 		//Scanner sc = null;
 		try {
 			file = new FileInputStream(FileName);
-			BufferedReader br = new BufferedReader(new InputStreamReader(file));
+			br = new BufferedReader(new InputStreamReader(file));
 			
 
 			// jump first line
@@ -122,6 +119,7 @@ public class FileReader {
 			if (file != null) {
 				try {
 					file.close();
+					br.close();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -131,10 +129,10 @@ public class FileReader {
 
 	public void read_logon(Tree_insiders tree, String FileName) {
 		FileInputStream file = null;
-		//Scanner sc = null;
+		BufferedReader br = null;
 		try {
 			file = new FileInputStream(FileName);
-			BufferedReader br = new BufferedReader(new InputStreamReader(file));
+			br = new BufferedReader(new InputStreamReader(file));
 			//sc = new Scanner(file, "UTF-8");
 
 			// jump first line
@@ -162,6 +160,7 @@ public class FileReader {
 			if (file != null) {
 				try {
 					file.close();
+					br.close();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
