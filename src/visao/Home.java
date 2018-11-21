@@ -7,6 +7,7 @@ package visao;
 
 import dominio.FileReader;
 import dominio.Tree_insiders;
+import dominio.User;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -24,7 +25,8 @@ import javax.swing.JOptionPane;
  */
 public class Home extends javax.swing.JFrame {
 
-    File[] files;
+    File[] filesUsers;
+    File[] filesData;
     Tree_insiders tree;
     FileReader filereader;
 
@@ -52,8 +54,12 @@ public class Home extends javax.swing.JFrame {
         lblSelectFiles = new javax.swing.JLabel();
         btnSelectFiles = new javax.swing.JButton();
         lblObsFiles = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        btnUtilizacao = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        btnOKUsers = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         lblDataInicio = new javax.swing.JLabel();
         lblDataFim = new javax.swing.JLabel();
@@ -81,10 +87,10 @@ public class Home extends javax.swing.JFrame {
 
         lblSelectFiles.setText("1. Selecione todos os arquivos de log:");
 
-        btnSelectFiles.setText("...");
-        btnSelectFiles.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSelectFilesActionPerformed(evt);
+        btnSelectFiles.setText("Selecionar...");
+        btnSelectFiles.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSelectFilesMouseClicked(evt);
             }
         });
 
@@ -93,6 +99,27 @@ public class Home extends javax.swing.JFrame {
 
         jLabel1.setText("Users:");
 
+        jLabel2.setText("Selecione os arquivos com os dados de usuários.");
+
+        jLabel3.setText("Dados:");
+
+        btnUtilizacao.setText("Selecionar...");
+        btnUtilizacao.setEnabled(false);
+        btnUtilizacao.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnUtilizacaoMouseClicked(evt);
+            }
+        });
+
+        jLabel4.setText("Selecione os dados de utilização dos usuários.");
+
+        btnOKUsers.setText("Enviar");
+        btnOKUsers.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnOKUsersMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -100,15 +127,28 @@ public class Home extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblSelectFiles)
-                    .addComponent(lblObsFiles)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblSelectFiles)
+                            .addComponent(lblObsFiles))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnUtilizacao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnSelectFiles, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnSelectFiles)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btnOKUsers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel4))
+                        .addGap(41, 41, 41))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -118,10 +158,16 @@ public class Home extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSelectFiles)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblObsFiles, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(btnOKUsers))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(btnUtilizacao)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addComponent(lblObsFiles, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -160,7 +206,7 @@ public class Home extends javax.swing.JFrame {
                     .addComponent(txtDataFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnGerar)
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -302,20 +348,18 @@ public class Home extends javax.swing.JFrame {
     private void btnGerarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGerarMouseClicked
         try {
 
-            if (files.length == 4 && files != null) {
+            if (filesData.length == 3 && filesData != null && filesUsers != null) {
 
                 if (rbPeriodo.isSelected()) {
                     if (txtDataFinal.getText().isEmpty() || txtDataInicio.getText().isEmpty()) {
-                        JOptionPane.showMessageDialog(this, "Há data faltando!", "Erro!", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(this, "Verifique a data de inicio e final!", "Erro!", JOptionPane.ERROR_MESSAGE);
                     } else {
 
-                        for (File f : files) {
-                            if (f.getName().contains("LDAP.csv")) {
-                                filereader.read_ldap(tree, f);
-                            }
+                        for (File f : filesUsers) {
+                            //filereader.read_ldap(tree, f);
                         }
 
-                        for (File f : files) {
+                        for (File f : filesData) {
                             if (f.getName().contains("device.csv")) {
                                 filereader.read_input(tree, f);
                             } else if (f.getName().contains("http.csv")) {
@@ -334,13 +378,11 @@ public class Home extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(this, "Há data faltando!", "Erro!", JOptionPane.ERROR_MESSAGE);
                     } else {
 
-                        for (File f : files) {
-                            if (f.getName().contains("LDAP.csv")) {
-                                filereader.read_ldap(tree, f);
-                            }
+                        for (File f : filesUsers) {
+                            //filereader.read_ldap(tree, f);
                         }
 
-                        for (File f : files) {
+                        for (File f : filesData) {
                             if (f.getName().contains("device.csv")) {
                                 filereader.read_input(tree, f);
                             } else if (f.getName().contains("http.csv")) {
@@ -356,10 +398,10 @@ public class Home extends javax.swing.JFrame {
                 tree.users();
 
             } else {
-                if (files.length < 4 || files == null) {
+                if (filesData.length < 3 || filesData == null) {
                     JOptionPane.showMessageDialog(this, "Você não selecionou todos os arquivos", "Erro!", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    JOptionPane.showMessageDialog(this, "São apenas 4 arquivos, você inseriu mais!", "Erro!", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "São 3 arquivos, você inseriu mais!", "Erro!", JOptionPane.ERROR_MESSAGE);
                 }
 
             }
@@ -405,13 +447,59 @@ public class Home extends javax.swing.JFrame {
 
     }//GEN-LAST:event_rbDataItemStateChanged
 
-    private void btnSelectFilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelectFilesActionPerformed
+    private void btnSelectFilesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSelectFilesMouseClicked
+        try {
+            JFileChooser fc = new JFileChooser();
+            fc.setMultiSelectionEnabled(true);
+            fc.addChoosableFileFilter(new FilterJFileChooser());
+            fc.showOpenDialog(this);
+            filesUsers = fc.getSelectedFiles();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+    }//GEN-LAST:event_btnSelectFilesMouseClicked
+
+    private void btnUtilizacaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUtilizacaoMouseClicked
         JFileChooser fc = new JFileChooser();
         fc.setMultiSelectionEnabled(true);
         fc.addChoosableFileFilter(new FilterJFileChooser());
         fc.showOpenDialog(this);
-        files = fc.getSelectedFiles();
-    }//GEN-LAST:event_btnSelectFilesActionPerformed
+        filesData = fc.getSelectedFiles();
+    }//GEN-LAST:event_btnUtilizacaoMouseClicked
+
+    private void btnOKUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOKUsersMouseClicked
+        try {
+            if (filesUsers.length > 0 && filesUsers != null) {
+                for (File f : filesUsers) {
+                    try {
+                        BufferedReader br = new BufferedReader(new java.io.FileReader(f.getPath()));
+
+                        br.readLine();
+
+                        String sNull = "";
+
+                        while ((sNull = br.readLine()) != null) {
+                            String text = br.readLine();
+                            String[] splitter = text.split(",");
+                            User user = new User(splitter[0], splitter[1], splitter[2], splitter[3], splitter[4]);
+                            tree.insertUser(user);
+                        }
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    } finally {
+                    }
+                    System.out.println("Terminou de ler " + f.getPath());
+                }
+
+                btnUtilizacao.setEnabled(true);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnOKUsersMouseClicked
 
 //    private ArrayList<String> readFileAsList(File file) throws IOException {
 //        final ArrayList<String> tes = new ArrayList<String>();
@@ -473,15 +561,19 @@ public class Home extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGerar;
+    private javax.swing.JButton btnOKUsers;
     private javax.swing.JButton btnSelectFiles;
+    private javax.swing.JButton btnUtilizacao;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblDataFim;
     private javax.swing.JLabel lblDataInicio;
     private javax.swing.JLabel lblDatasInfo;
