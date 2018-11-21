@@ -1,22 +1,23 @@
+import java.util.Vector;
 
 public class Http extends Node {
 	
-	private String urls;
+	private Vector<String> urls;
 
 	public Http(String id) {
 		super(id);
-		urls = "";
+		urls = new Vector<>();
 	}
 	
 	public void addUrl(String url) {
-		this.urls += url + "\n";
+		this.urls.add(url);
 	}
-	
-	public String getUrls() {
+
+	public Vector<String> getUrls() {
 		return urls;
 	}
 
-	public void setUrls(String urls) {
+	public void setUrls(Vector<String> urls) {
 		this.urls = urls;
 	}
 	
