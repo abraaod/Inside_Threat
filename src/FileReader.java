@@ -41,7 +41,7 @@ public class FileReader {
 	}
 
 	public void read_input(Tree_insiders tree, String FileName) {
-
+		int contador = 0;
 		FileInputStream file = null;
 		BufferedReader br = null;
 		try {
@@ -108,7 +108,7 @@ public class FileReader {
 				tree.insertDate(date);
 				Device device = new Device(spliter[3], user_id[1], date_id[0]);
 				tree.insertDevice(device);
-				
+				tree.insertUrl(device, spliter[4], date_id[1]);
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -130,6 +130,7 @@ public class FileReader {
 	public void read_logon(Tree_insiders tree, String FileName) {
 		FileInputStream file = null;
 		BufferedReader br = null;
+		int contador = 0;
 		try {
 			file = new FileInputStream(FileName);
 			br = new BufferedReader(new InputStreamReader(file));
@@ -141,8 +142,8 @@ public class FileReader {
 
 			String sNull = null;
 
-			while ((sNull = br.readLine() ) == null) {
-				String text = br.readLine();
+			while ((sNull = br.readLine() ) != null) {
+				String text = sNull;
 				String [] spliter = text.split(",");
 				String [] date_id = spliter[1].split(" ");
 				String [] user_id = spliter[2].split("/");
@@ -150,7 +151,11 @@ public class FileReader {
 				tree.insertDate(date);
 				Device device = new Device(spliter[3], user_id[1], date_id[0]);
 				tree.insertDevice(device);
-				
+				if(spliter[4].equalsIgnoreCase("logon")) {
+					tree.insertLogon(device, date_id[1]);
+				} else {
+					tree.insertLogon(device, date_id[1]);
+				}
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

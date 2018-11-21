@@ -8,7 +8,6 @@ import java.util.Set;
 public class Tree_insiders {
 	
 	HashMap<String, User> hash_user;
-	
 	public Tree_insiders() {
 		hash_user = null;
 	}
@@ -45,9 +44,9 @@ public class Tree_insiders {
 			Date date = user.getDate();
 			if(date != null) {
 				if(date.getId().equals("aggregate")) {
-					device.addInput(device.getId(), true, hours);
+					date.getHash_table().get(device.getId()).addInput(device.getId(), true, hours);
 				} else if (date.insideInterval(device.getDate())){
-					device.addInput(device.getId(), true, hours);
+					date.getHash_table().get(device.getId()).addInput(device.getId(), true, hours);
 				}
 			}
 		}
@@ -59,9 +58,9 @@ public class Tree_insiders {
 			Date date = user.getDate();
 			if(date != null) {
 				if(date.getId().equals("aggregate")) {
-					device.addInput(device.getId(), false, hours);
+					date.getHash_table().get(device.getId()).addInput(device.getId(), false, hours);
 				} else if (date.insideInterval(device.getDate())){
-					device.addInput(device.getId(), false, hours);
+					date.getHash_table().get(device.getId()).addInput(device.getId(), false, hours);
 				}
 			}
 		}
@@ -73,9 +72,9 @@ public class Tree_insiders {
 			Date date = user.getDate();
 			if(date != null) {
 				if(date.getId().equals("aggregate")) {
-					device.addLogin(device.getId(), true, hours);
+					date.getHash_table().get(device.getId()).addLogin(device.getId(), true, hours);
 				} else if (date.insideInterval(device.getDate())){
-					device.addLogin(device.getId(), true, hours);
+					date.getHash_table().get(device.getId()).addLogin(device.getId(), true, hours);
 				}
 			}
 		}
@@ -87,27 +86,37 @@ public class Tree_insiders {
 			Date date = user.getDate();
 			if(date != null) {
 				if(date.getId().equals("aggregate")) {
-					device.addLogin(device.getId(), false, hours);
+					date.getHash_table().get(device.getId()).addLogin(device.getId(), false, hours);
 				} else if (date.insideInterval(device.getDate())){
-					device.addLogin(device.getId(), false, hours);
+					date.getHash_table().get(device.getId()).addLogin(device.getId(), false, hours);
 				}
 			}
 		}
 	}
 	
-	public void insertUrl(Device device, String hours) {
+	public void insertUrl(Device device, String url, String hours) {
 		User user = hash_user.get(device.getUser());
 		if(user != null) {
 			Date date = user.getDate();
 			if(date != null) {
 				if(date.getId().equals("aggregate")) {
-					device.addHttp(device.getId(), hours);
+					date.getHash_table().get(device.getId()).addHttp(device.getId(), url, hours);
 				} else if (date.insideInterval(device.getDate())){
-					device.addHttp(device.getId(), hours);
+					date.getHash_table().get(device.getId()).addHttp(device.getId(), url, hours);
 				}
 			}
 		}
 	}
+	
+	public void doAnalyzer() {
+		Analyzer analyzer = new Analyzer();
+		Collection<User> lista_user = hash_user.values();
+		Iterator<User> lista = lista_user.iterator();
+		while(lista.hasNext()) {
+			analyzer.analyzerUsers(lista.next());
+		}
+	}
+	
 	
 	/*public void insertLogon(Logon logon) {
 		User user = hash_user.get(logon.getUser());
@@ -163,6 +172,17 @@ public class Tree_insiders {
 		}
 	}*/
 	
+	public HashMap<String, User> getHash_user() {
+		return hash_user;
+	}
+
+	public void setHash_user(HashMap<String, User> hash_user) {
+		this.hash_user = hash_user;
+	}
+	
+	public User getSpecificUser(String search) {
+		return hash_user.get(search);
+	}
 	public void users() {
 		Collection<User> lista = hash_user.values();
 		Iterator<User> users = lista.iterator();

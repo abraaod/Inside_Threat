@@ -40,13 +40,15 @@ public class Device extends Node {
 		}
 	}
 	
-	public void addHttp(String key, String hour) {
+	public void addHttp(String key, String url, String hour) {
 		String [] hours = hour.split(":");
 		int pos = Integer.parseInt(hours[0]);
 		if(http == null) {
 			http = new Http(key);
+			http.addUrl(url);
 			http.updateHist(pos);
 		} else {
+			http.addUrl(url);
 			http.updateHist(pos);
 		}
 	}
