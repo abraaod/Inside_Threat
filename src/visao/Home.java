@@ -5,13 +5,17 @@
  */
 package visao;
 
+import dominio.Date;
+import dominio.Device;
 import dominio.FileReader;
 import dominio.Tree_insiders;
 import dominio.User;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -60,6 +64,7 @@ public class Home extends javax.swing.JFrame {
         btnUtilizacao = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         btnOKUsers = new javax.swing.JButton();
+        btnEnviarDados = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         lblDataInicio = new javax.swing.JLabel();
         lblDataFim = new javax.swing.JLabel();
@@ -120,6 +125,14 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
+        btnEnviarDados.setText("Enviar");
+        btnEnviarDados.setEnabled(false);
+        btnEnviarDados.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEnviarDadosMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -143,7 +156,9 @@ public class Home extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(btnSelectFiles, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnOKUsers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnOKUsers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnEnviarDados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
@@ -165,7 +180,8 @@ public class Home extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(btnUtilizacao)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel4)
+                    .addComponent(btnEnviarDados))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addComponent(lblObsFiles, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -355,21 +371,7 @@ public class Home extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(this, "Verifique a data de inicio e final!", "Erro!", JOptionPane.ERROR_MESSAGE);
                     } else {
 
-                        for (File f : filesUsers) {
-                            //filereader.read_ldap(tree, f);
-                        }
-
-                        for (File f : filesData) {
-                            if (f.getName().contains("device.csv")) {
-                                filereader.read_input(tree, f);
-                            } else if (f.getName().contains("http.csv")) {
-                                filereader.read_http(tree, f);
-                            } else if (f.getName().contains("logon.csv")) {
-                                filereader.read_logon(tree, f);
-                            } else {
-                                // Do nothing.
-                            }
-                        }
+                        // Do Something.
 
                     }
 
@@ -378,19 +380,7 @@ public class Home extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(this, "Há data faltando!", "Erro!", JOptionPane.ERROR_MESSAGE);
                     } else {
 
-                        for (File f : filesUsers) {
-                            //filereader.read_ldap(tree, f);
-                        }
-
-                        for (File f : filesData) {
-                            if (f.getName().contains("device.csv")) {
-                                filereader.read_input(tree, f);
-                            } else if (f.getName().contains("http.csv")) {
-                                filereader.read_http(tree, f);
-                            } else if (f.getName().contains("logon.csv")) {
-                                filereader.read_logon(tree, f);
-                            }
-                        }
+                        // Do Something.
                     }
                 }
 
@@ -469,6 +459,7 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUtilizacaoMouseClicked
 
     private void btnOKUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOKUsersMouseClicked
+        boolean success = false;
         try {
             if (filesUsers.length > 0 && filesUsers != null) {
                 for (File f : filesUsers) {
@@ -482,8 +473,11 @@ public class Home extends javax.swing.JFrame {
                         while ((sNull = br.readLine()) != null) {
                             String text = br.readLine();
                             String[] splitter = text.split(",");
-                            User user = new User(splitter[0], splitter[1], splitter[2], splitter[3], splitter[4]);
-                            tree.insertUser(user);
+                            if (splitter != null) {
+                                User user = new User(splitter[0], splitter[1], splitter[2], splitter[3], splitter[4]);
+                                tree.insertUser(user);
+                                success = true;
+                            }
                         }
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
@@ -494,28 +488,97 @@ public class Home extends javax.swing.JFrame {
                     System.out.println("Terminou de ler " + f.getPath());
                 }
 
-                btnUtilizacao.setEnabled(true);
+                if (success) {
+                    btnUtilizacao.setEnabled(true);
+                    btnOKUsers.setEnabled(false);
+                    btnEnviarDados.setEnabled(true);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }//GEN-LAST:event_btnOKUsersMouseClicked
 
-//    private ArrayList<String> readFileAsList(File file) throws IOException {
-//        final ArrayList<String> tes = new ArrayList<String>();
-//        final BufferedReader br = new BufferedReader(new FileReader(file));
-//        try {
-//            String line;
-//            while ((line = br.readLine()) != null) {
-//                tes.add(line);
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        } finally {
-//            br.close();
-//        }
-//        return tes;
-//    }
+    private void btnEnviarDadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnviarDadosMouseClicked
+
+        for( File f : filesData ){
+            if(f.getName().equals("device.csv")){
+                read_device(tree, f);
+            }
+            if(f.getName().equals("logon.csv")){
+                read_logon(tree, f);
+            }
+        }
+        
+        System.out.println("Leitura realizada!");
+        
+    }//GEN-LAST:event_btnEnviarDadosMouseClicked
+
+    public void read_device(Tree_insiders tree, File filename) {
+        boolean success = false;
+        try {
+            BufferedReader br = new BufferedReader(new java.io.FileReader(filename.getPath()));
+
+            br.readLine();
+
+            String sNull = "";
+
+            while ((sNull = br.readLine()) != null) {
+                String text = br.readLine();
+                String[] splitter = text.split(",");
+                if (splitter != null) {
+                    Device device = new Device(splitter[0], splitter[2], splitter[1]);
+                    tree.insertDevice(device);
+                    success = true;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } finally {
+        }
+        System.out.println("Terminou de ler " + filename.getPath());
+
+        if (success) {
+            btnEnviarDados.setEnabled(false);
+        }
+
+    }
+
+    public void read_logon(Tree_insiders tree, File filename) {
+        boolean success = false;
+        try {
+            BufferedReader br = new BufferedReader(new java.io.FileReader(filename.getPath()));
+
+            br.readLine();
+
+            String sNull = "";
+
+            while ((sNull = br.readLine()) != null) {
+                String text = br.readLine();
+                String[] splitter = text.split(",");
+                if (splitter != null) {
+                    User user = new User(splitter[0], splitter[1], splitter[2], splitter[3], splitter[4]);
+                    tree.insertUser(user);
+                    success = true;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } finally {
+        }
+        System.out.println("Terminou de ler " + filename.getPath());
+
+        if (success) {
+            btnUtilizacao.setEnabled(true);
+            btnOKUsers.setEnabled(false);
+        }
+    }
+
+
     /**
      * @param args the command line arguments
      */
@@ -560,6 +623,7 @@ public class Home extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEnviarDados;
     private javax.swing.JButton btnGerar;
     private javax.swing.JButton btnOKUsers;
     private javax.swing.JButton btnSelectFiles;
