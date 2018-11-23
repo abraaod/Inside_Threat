@@ -41,7 +41,6 @@ public class FileReader{
 	}
 
 	public void read_input(Tree_insiders tree, String FileName) {
-		int contador = 0;
 		FileInputStream file = null;
 		BufferedReader br = null;
 		try {
@@ -89,7 +88,6 @@ public class FileReader{
 		FileInputStream file = null;
 		BufferedReader br = null;
 		//Scanner sc = null;
-		int contador = 0;
 		try {
 			file = new FileInputStream(FileName);
 			br = new BufferedReader(new InputStreamReader(file));
@@ -102,7 +100,6 @@ public class FileReader{
 
 			while ( (sNull = br.readLine() ) != null) {
 				String text = sNull;
-				System.out.println(++contador);
 				String [] spliter = text.split(",");
 				String [] date_id = spliter[1].split(" ");
 				String [] user_id = spliter[2].split("/");
