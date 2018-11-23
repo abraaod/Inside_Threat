@@ -108,12 +108,12 @@ public class Tree_insiders {
 		}
 	}
 	
-	public void doAnalyzer() {
+	public void createDiagram() {
 		Analyzer analyzer = new Analyzer();
 		Collection<User> lista_user = hash_user.values();
 		Iterator<User> lista = lista_user.iterator();
 		while(lista.hasNext()) {
-			analyzer.analyzerUsers(lista.next());
+			analyzer.createUserDiagram(lista.next());
 		}
 	}
 	
@@ -183,6 +183,16 @@ public class Tree_insiders {
 	public User getSpecificUser(String search) {
 		return hash_user.get(search);
 	}
+	
+	//Crated to analyzer User in a most refined way
+	////type true represents user groupping by role, false represents by date 
+	
+	public void analyzerByCategory(String category, boolean type) {
+		Analyzer analyzer = new Analyzer();
+		Collection<User> lista_user = hash_user.values();
+		lista_user = analyzer.analyzerByCategory(lista_user, category, type);
+	}
+	
 	public void users() {
 		Collection<User> lista = hash_user.values();
 		Iterator<User> users = lista.iterator();

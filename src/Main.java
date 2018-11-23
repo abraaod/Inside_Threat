@@ -16,7 +16,9 @@ public class Main {
 		file.read_logon(tree, "data/logon.csv");
 		System.out.println("terminou de ler tudo");
 		//tree.users();
-		tree.doAnalyzer();
+		tree.createDiagram();
+		tree.users();
+		System.out.println("Terminou programa");
 		//Analyzer analyzer = new Analyzer();
 		//analyzer.analyzerUsers(tree.getSpecificUser("RES0962"));
 		

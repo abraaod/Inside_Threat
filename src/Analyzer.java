@@ -5,8 +5,8 @@ import java.util.Vector;
 
 public class Analyzer {
 	
-	public void analyzerUsers(User user) {
-		System.out.println("rodou aq");
+	public void createUserDiagram(User user) {
+		//System.out.println("rodou aq");
 		Date date = user.getDate();
 		Collection<Device> lista_devices;
 		if(date != null) {
@@ -15,35 +15,33 @@ public class Analyzer {
 			int [] hist = new int [24];
 			while(lista.hasNext()) {
 				Device device = lista.next();
-				int [] hist_device = analyzerDevices(device);
+				int [] hist_device = createDeviceDiagram(device);
 				for(int i =0; i < hist.length; i++) {
 					hist[i] += hist_device[i];
 				}
 			}
 
-			for(int i =0 ; i < hist.length; i++) {
+			/*for(int i =0 ; i < hist.length; i++) {
 				System.out.print(hist[i] + " ");
 			}
 			System.out.println();
-			user.getDate().setHist(hist);
-			user.setHist(percentageAnalyzer(hist));
+			user.getDate().setHist(hist);*/
+			user.setHist(percentageDiagram(hist));
 		}
 	}
 	
-	public int [] percentageAnalyzer(int [] hist) {
+	public int [] percentageDiagram(int [] hist) {
 		int sum = 0;
-		int [] hist_per = new int[24];
 		for(int i = 0; i < hist.length; i++) {
 			sum += hist[i];
 		}
 		for(int i = 0; i < hist.length; i++) {
-			hist_per[i] = (hist[i]/sum) * 100;
-			System.out.println(hist[i] + " " + sum);
+			hist[i] = ((hist[i]* 100)/sum);
 		}
-		return hist_per;
+		return hist;
 	}
 	
-	public int [] analyzerDevices(Device device) {
+	public int [] createDeviceDiagram(Device device) {
 		
 		int [] a = new int[24];
 		int [] b = new int[24];
@@ -67,5 +65,29 @@ public class Analyzer {
 		device.setHist(hist);
 		return hist;
 		
+	}
+	
+	public Collection<User> analyzerByCategory(Collection<User> lista_user, String category, boolean type) {
+		
+		//type true represents user groupping by role, false represents by date 
+		
+		Collection<User> collection = null;
+		Iterator<User> lista = lista_user.iterator();
+		
+		while(lista.hasNext()) {
+			User aux = lista.next();
+			if(type) {
+				if(aux.getRole().equals(category)) {
+					collection.add(aux);
+				}
+			} else {
+				String date [] = category.split("-");
+				if(aux.getDate().insideInterval(date[0], date[1])) {
+					collection.add(aux);
+				}
+			}
+		}
+		
+		return collection;
 	}
 }
