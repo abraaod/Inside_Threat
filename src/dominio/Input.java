@@ -3,11 +3,21 @@ package dominio;
 import dominio.Connect;
 import java.util.Arrays;
 
+/**
+ *
+ * @author Abraao.
+ *
+ */
 public class Input extends Node{
 	
 	Connect connect;
 	Disconnect disconnect;
 	
+        /**
+         * Construtor para a classe Input.
+         * 
+         * @param id identificador do dispositivo.
+         */
 	public Input(String id) {
 		super(id);
 		connect = new Connect(id);
@@ -15,30 +25,66 @@ public class Input extends Node{
 		// TODO Auto-generated constructor stub
 	}	
 	
+        /**
+         * Atualizar o estado do histograma.
+         * 
+         * @param pos quantidade de vezes.
+         */
 	public void connectUpdate(int pos) {
 		connect.updateHist(pos);
 	}
 	
+        /**
+         * Atualizar o estado do histograma.
+         * 
+         * @param pos quantidade de vezes.
+         */
 	public void disconnectUpdate(int pos) {
 		disconnect.updateHist(pos);
 	}
 
+        /**
+         * Retornar a conexão.
+         * 
+         * @return retorna o estado conectado.
+         * 
+         */
 	public Connect getConnect() {
 		return connect;
 	}
 
+        /**
+         * Configura o estado de conectado.
+         * 
+         * @param connect Estado de conexão.
+         */
 	public void setConnect(Connect connect) {
 		this.connect = connect;
 	}
 
+        /**
+         * Retorna o estado de conexão disconectado.
+         * 
+         * @return estado disconectado.
+         */
 	public Disconnect getDisconnect() {
 		return disconnect;
 	}
 
+        /**
+         * Configura o estado de disconexão.
+         * 
+         * @param disconnect novo estado de disconexão.
+         */
 	public void setDisconnect(Disconnect disconnect) {
 		this.disconnect = disconnect;
 	}
 	
+        /**
+         * Retorna o histograma quanto as entradas.
+         * 
+         * @return retorna o histograma.
+         */
 	public int [] getHist() {
 		
 		int [] a = connect.getHist();

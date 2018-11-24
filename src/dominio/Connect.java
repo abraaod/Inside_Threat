@@ -1,11 +1,13 @@
 package dominio;
 
+public class Connect extends Node {
 
-public class Connect extends Node{
-
-	public Connect(String id) {
-		super(id);
-		// TODO Auto-generated constructor stub
-	}
+    /** Construct of the Connect class.
+     * 
+     * @param id identification of the Connect.
+     */
+    public Connect(String id) {
+        super(id);
+    }
 
 }
