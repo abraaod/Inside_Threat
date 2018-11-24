@@ -1,4 +1,6 @@
 package dominio;
+
+
 public class Login extends Node{
 	
 	Logon logon;
@@ -32,7 +34,17 @@ public class Login extends Node{
 	public void setLogoff(Logoff logoff) {
 		this.logoff = logoff;
 	}
-
+	
+	public int [] getHist() {
+		int [] a = logon.getHist();
+		int [] b = logoff.getHist();
+		int [] hist = new int [24];
+		for(int i = 0; i < hist.length; i++) {
+			hist[i] = a[i] + b[i];
+		}
+		return hist;
+		
+	}
 	
 		
 }

@@ -1,4 +1,5 @@
 package dominio;
+
 import java.util.HashMap;
 
 public class Node{
@@ -13,7 +14,7 @@ public class Node{
 	}
 
 	public String getId() {
-		return id;
+		return this.id;
 	}
 
 	public void setId(String id) {
@@ -21,7 +22,7 @@ public class Node{
 	}
 
 	public int[] getHist() {
-		return hist;
+		return this.hist;
 	}
 
 	public void setHist(int[] hist) {
@@ -29,7 +30,7 @@ public class Node{
 	}
 	
 	public void updateHist(int pos) {
-		hist[pos]++;
+		hist[pos] += 1;
 	}
 	
 }

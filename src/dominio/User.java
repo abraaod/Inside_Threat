@@ -1,4 +1,5 @@
 package dominio;
+
 import java.util.HashMap;
 
 public class User extends Node{
@@ -33,14 +34,14 @@ public class User extends Node{
 		this.end_date = end_date;
 	}
 	
-	public void addDate(Date date) {
+	public void addDate(Date date_) {
 		if(start_date == null && end_date == null) {
-			if(this.date == null) {
-				this.date = new Date("aggregate", getId());
-			}
+			if(date == null) {
+				date = new Date("aggregate", getId());
+			} 
 		} else {
-			if(this.date == null) {
-				this.date = new Date(start_date + "-" + end_date, getId());
+			if(date == null) {
+				date = new Date(start_date + "-" + end_date, getId());
 			}
 		}
 	}

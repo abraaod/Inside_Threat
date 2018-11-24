@@ -1,4 +1,5 @@
 package dominio;
+
 import java.util.HashMap;
 
 public class Date extends Node {
@@ -44,12 +45,21 @@ public class Date extends Node {
 		if(Integer.parseInt(devicedate[0]) >= Integer.parseInt(time1[0]) && Integer.parseInt(devicedate[0]) <= Integer.parseInt(time2[0])  ) {
 			if(Integer.parseInt(devicedate[1]) >= Integer.parseInt(time1[1]) && Integer.parseInt(devicedate[1]) <= Integer.parseInt(time2[1])){
 				if(Integer.parseInt(devicedate[2]) >= Integer.parseInt(time1[2]) && Integer.parseInt(devicedate[2]) <= Integer.parseInt(time2[2])) {
+					System.out.println("Rodou true");
 					return true;
 				}
 			}
 				
 		}
 		return false;
+	}
+	
+	public boolean insideInterval(String date_ini, String date_end) {
+		if(insideInterval(date_ini) && insideInterval(date_end)) {
+			return true;
+		}
+		return false;
+		
 	}
 
 	public String getUser() {

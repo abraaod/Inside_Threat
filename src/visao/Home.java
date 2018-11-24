@@ -40,6 +40,7 @@ public class Home extends javax.swing.JFrame {
     public Home() {
         initComponents();
         tree = new Tree_insiders();
+        filereader = new FileReader();
     }
 
     /**
@@ -141,29 +142,30 @@ public class Home extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblSelectFiles)
-                            .addComponent(lblObsFiles))
+                        .addComponent(lblSelectFiles)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblObsFiles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnUtilizacao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnSelectFiles, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnOKUsers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnEnviarDados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)
-                                .addComponent(btnUtilizacao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnSelectFiles, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnOKUsers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnEnviarDados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel4))
-                        .addGap(41, 41, 41))))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel4))))
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -177,12 +179,13 @@ public class Home extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(btnOKUsers))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(btnUtilizacao)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
-                    .addComponent(btnEnviarDados))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(btnUtilizacao)
+                        .addComponent(btnEnviarDados)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblObsFiles, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -229,7 +232,7 @@ public class Home extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
+                        .addGap(28, 28, 28)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblDataInicio)
                             .addComponent(txtDataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -240,7 +243,7 @@ public class Home extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lblDatasInfo))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
+                        .addGap(25, 25, 25)
                         .addComponent(btnGerar, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
@@ -282,6 +285,7 @@ public class Home extends javax.swing.JFrame {
         rbPeriodo.setSelected(true);
         rbPeriodo.setText("Período entre datas");
 
+        rbTudo.setBackground(new java.awt.Color(255, 255, 255));
         rbFiltro.add(rbTudo);
         rbTudo.setText("Tudo");
 
@@ -307,7 +311,7 @@ public class Home extends javax.swing.JFrame {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addComponent(lblOrdenar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rbPeriodo)
                     .addComponent(rbData)
@@ -318,27 +322,26 @@ public class Home extends javax.swing.JFrame {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel6)
-                .addGap(166, 166, 166))
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addContainerGap()
                 .addComponent(jLabel6)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -372,7 +375,6 @@ public class Home extends javax.swing.JFrame {
                     } else {
 
                         // Do Something.
-
                     }
 
                 } else if (rbData.isSelected()) {
@@ -459,125 +461,48 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUtilizacaoMouseClicked
 
     private void btnOKUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOKUsersMouseClicked
-        boolean success = false;
-        try {
-            if (filesUsers.length > 0 && filesUsers != null) {
-                for (File f : filesUsers) {
-                    try {
-                        BufferedReader br = new BufferedReader(new java.io.FileReader(f.getPath()));
 
-                        br.readLine();
-
-                        String sNull = "";
-
-                        while ((sNull = br.readLine()) != null) {
-                            String text = br.readLine();
-                            String[] splitter = text.split(",");
-                            if (splitter != null) {
-                                User user = new User(splitter[0], splitter[1], splitter[2], splitter[3], splitter[4]);
-                                tree.insertUser(user);
-                                success = true;
-                            }
-                        }
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    } finally {
-                    }
-                    System.out.println("Terminou de ler " + f.getPath());
-                }
-
-                if (success) {
-                    btnUtilizacao.setEnabled(true);
-                    btnOKUsers.setEnabled(false);
-                    btnEnviarDados.setEnabled(true);
-                }
+        if (filesUsers != null) {
+            System.out.println("Começou a ler o LDAP");
+            for (File f : filesUsers) {
+                filereader.read_ldap(tree, f);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Terminou de ler o LDAP");
+
+            btnUtilizacao.setEnabled(true);
+            btnOKUsers.setEnabled(false);
+            btnEnviarDados.setEnabled(true);
+
         }
     }//GEN-LAST:event_btnOKUsersMouseClicked
 
     private void btnEnviarDadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnviarDadosMouseClicked
+        try {
+            if (filesData.length == 3 && filesData != null) {
+                for (File f : filesData) {
+                    if (f.getName().equals("device.csv")) {
+                        filereader.read_input(tree, f);
+                        System.out.println("Terminou de ler o DEVICE");
+                    }
+                    if (f.getName().equals("http.csv")) {
+                        filereader.read_http(tree, f);
+                        System.out.println("Terminou de ler o HTTP");
+                    }
+                    if (f.getName().equals("logon.csv")) {
+                        filereader.read_logon(tree, f);
+                        System.out.println("Terminou de ler o LOGON");
+                    }
+                }
 
-        for( File f : filesData ){
-            if(f.getName().equals("device.csv")){
-                read_device(tree, f);
+                btnUtilizacao.setEnabled(false);
+                System.out.println("Leitura realizada de tudo!");
             }
-            if(f.getName().equals("logon.csv")){
-                read_logon(tree, f);
-            }
+        } catch (NullPointerException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Você não selecionou os 3 arquivos necessários.", "Erro na leitura!", JOptionPane.ERROR_MESSAGE);
         }
-        
-        System.out.println("Leitura realizada!");
-        
+
     }//GEN-LAST:event_btnEnviarDadosMouseClicked
-
-    public void read_device(Tree_insiders tree, File filename) {
-        boolean success = false;
-        try {
-            BufferedReader br = new BufferedReader(new java.io.FileReader(filename.getPath()));
-
-            br.readLine();
-
-            String sNull = "";
-
-            while ((sNull = br.readLine()) != null) {
-                String text = br.readLine();
-                String[] splitter = text.split(",");
-                if (splitter != null) {
-                    Device device = new Device(splitter[0], splitter[2], splitter[1]);
-                    tree.insertDevice(device);
-                    success = true;
-                }
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        } finally {
-        }
-        System.out.println("Terminou de ler " + filename.getPath());
-
-        if (success) {
-            btnEnviarDados.setEnabled(false);
-        }
-
-    }
-
-    public void read_logon(Tree_insiders tree, File filename) {
-        boolean success = false;
-        try {
-            BufferedReader br = new BufferedReader(new java.io.FileReader(filename.getPath()));
-
-            br.readLine();
-
-            String sNull = "";
-
-            while ((sNull = br.readLine()) != null) {
-                String text = br.readLine();
-                String[] splitter = text.split(",");
-                if (splitter != null) {
-                    User user = new User(splitter[0], splitter[1], splitter[2], splitter[3], splitter[4]);
-                    tree.insertUser(user);
-                    success = true;
-                }
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        } finally {
-        }
-        System.out.println("Terminou de ler " + filename.getPath());
-
-        if (success) {
-            btnUtilizacao.setEnabled(true);
-            btnOKUsers.setEnabled(false);
-        }
-    }
-
 
     /**
      * @param args the command line arguments
