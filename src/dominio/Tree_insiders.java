@@ -10,10 +10,20 @@ import java.util.Set;
 public class Tree_insiders {
 	
 	HashMap<String, User> hash_user;
+        
+        /**
+         * Construtor para à árvore. Inicializa o HashMap.
+         * 
+         */
 	public Tree_insiders() {
 		hash_user = null;
 	}
 	
+        /**
+         * Insere um novo usuário na árvore.
+         * 
+         * @param user usuário a ser adicionado.
+         */
 	public void insertUser(User user) {
 		if(hash_user == null) {
 			hash_user = new HashMap<>();
@@ -23,6 +33,11 @@ public class Tree_insiders {
 		}
 	}
 	
+        /**
+         * Insere uma data na árvore.
+         * 
+         * @param date Data a ser adicionada.
+         */
 	public void insertDate(Date date){
 		User user = hash_user.get(date.getUser());
 		if(user != null){
@@ -30,6 +45,11 @@ public class Tree_insiders {
 		}
 	}
 	
+        /**
+         * Insere um novo dispositivo na árvore.
+         * 
+         * @param device Dispositivo a ser inserido.
+         */
 	public void insertDevice(Device device){
 		User user = hash_user.get(device.getUser());
 		if(user != null){
@@ -40,6 +60,12 @@ public class Tree_insiders {
 		}
 	}
 	
+        /**
+         * Insere uma nova conexão de dispositivo.
+         * 
+         * @param device Dispositivo utilizado.
+         * @param hours horário em que ocorreu a inserção.
+         */
 	public void insertConnect(Device device, String hours) {
 		User user = hash_user.get(device.getUser());
 		if(user != null) {
@@ -54,6 +80,12 @@ public class Tree_insiders {
 		}
 	}
 	
+        /**
+         * Insere uma nova disconexão de dispositivo.
+         * 
+         * @param device Dispositivo que foi disconectado.
+         * @param hours Horário em que ocorreu a disconexão.
+         */
 	public void insertDisconnect(Device device, String hours) {
 		User user = hash_user.get(device.getUser());
 		if(user != null) {
@@ -68,6 +100,12 @@ public class Tree_insiders {
 		}
 	}
 	
+        /**
+         * Insere a ocorrencia de um logon.
+         * 
+         * @param device Dispositivo em que ocorreu a ação.
+         * @param hours Horário em que ocorreu o logon.
+         */
 	public void insertLogon(Device device, String hours) {
 		User user = hash_user.get(device.getUser());
 		if(user != null) {
@@ -82,6 +120,12 @@ public class Tree_insiders {
 		}
 	}
 	
+        /**
+         * Insere um nó correspondente ao logoff.
+         * 
+         * @param device Dispositivo em que ocorreu o logoff.
+         * @param hours Horário que ocorreu o logoff.
+         */
 	public void insertLogoff(Device device, String hours) {
 		User user = hash_user.get(device.getUser());
 		if(user != null) {
@@ -96,6 +140,14 @@ public class Tree_insiders {
 		}
 	}
 	
+        /**
+         * Inserir um nó com o acesso a uma URL.
+         * 
+         * @param device Dispositivo que foi utilizado para acessar a URL.
+         * @param url Url que foi acessada.
+         * @param hours Horário que foi acessado.
+         * 
+         */
 	public void insertUrl(Device device, String url, String hours) {
 		User user = hash_user.get(device.getUser());
 		if(user != null) {
@@ -110,6 +162,11 @@ public class Tree_insiders {
 		}
 	}
 	
+        /**
+         * 
+         * Criar o diagrama com os dados dos histogramas.
+         * 
+         */
 	public void createDiagram() {
 		Analyzer analyzer = new Analyzer();
 		Collection<User> lista_user = hash_user.values();
@@ -174,14 +231,30 @@ public class Tree_insiders {
 		}
 	}*/
 	
+        /**
+         * 
+         * Retornar o hashmap com com id e o usuários.
+         * 
+         * @return retorna a hashmap.
+         */
 	public HashMap<String, User> getHash_user() {
 		return hash_user;
 	}
 
+        /**
+         * Configurar uma hashmap nova/existente.
+         * 
+         * @param hash_user HashMap com o id e o usuário.
+         */
 	public void setHash_user(HashMap<String, User> hash_user) {
 		this.hash_user = hash_user;
 	}
 	
+        /**
+         * Retornar um usuário específico.
+         * @param search Identificador do usuário.
+         * @return usuário encontrado.
+         */
 	public User getSpecificUser(String search) {
 		return hash_user.get(search);
 	}
@@ -189,12 +262,22 @@ public class Tree_insiders {
 	//Crated to analyzer User in a most refined way
 	////type true represents user groupping by role, false represents by date 
 	
+        /**
+         * Realizar uma análise por categoria. Gerar o histograma por uma categoria
+         * específica.
+         * 
+         * @param category categoria escolhida para filtrar.
+         * @param type Verdadeiro se for por categoria e false se for por data específica.
+         */
 	public void analyzerByCategory(String category, boolean type) {
 		Analyzer analyzer = new Analyzer();
 		Collection<User> lista_user = hash_user.values();
 		lista_user = analyzer.analyzerByCategory(lista_user, category, type);
 	}
-	
+
+        /**
+         * Imprimir todas as chaves de todos os usuários.
+         */
 	public void users() {
 		Collection<User> lista = hash_user.values();
 		Iterator<User> users = lista.iterator();

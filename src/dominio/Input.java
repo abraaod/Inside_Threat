@@ -26,18 +26,18 @@ public class Input extends Node{
 	}	
 	
         /**
-         * Atualizar o estado do histograma.
+         * Atualizar o horário do histograma.
          * 
-         * @param pos quantidade de vezes.
+         * @param pos horário que foi conectado.
          */
 	public void connectUpdate(int pos) {
 		connect.updateHist(pos);
 	}
 	
         /**
-         * Atualizar o estado do histograma.
+         * Atualizar o horário do histograma.
          * 
-         * @param pos quantidade de vezes.
+         * @param pos horario que foi disconectado.
          */
 	public void disconnectUpdate(int pos) {
 		disconnect.updateHist(pos);

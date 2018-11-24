@@ -407,6 +407,10 @@ public class Home extends javax.swing.JFrame {
 */
     }//GEN-LAST:event_btnGerarMouseClicked
 
+    
+    /**
+     * Working with the radio buttons. Make that the user only use what's necessary.
+     */
     private void rbDataItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbDataItemStateChanged
 
         int data_esp = 0;
@@ -442,6 +446,9 @@ public class Home extends javax.swing.JFrame {
 
     }//GEN-LAST:event_rbDataItemStateChanged
 
+    /**
+     * Open a JFrame to select multiple files about the Users informations.
+     */
     private void btnSelectFilesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSelectFilesMouseClicked
         try {
             JFileChooser fc = new JFileChooser();
@@ -455,6 +462,9 @@ public class Home extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnSelectFilesMouseClicked
 
+    /**
+     * Open a JFrame to select multiple files about others informations.
+     */
     private void btnUtilizacaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUtilizacaoMouseClicked
         JFileChooser fc = new JFileChooser();
         fc.setMultiSelectionEnabled(true);
@@ -463,6 +473,9 @@ public class Home extends javax.swing.JFrame {
         filesData = fc.getSelectedFiles();
     }//GEN-LAST:event_btnUtilizacaoMouseClicked
 
+    /**
+     * Read the LDAP files and switch the buttons enabled.
+     */
     private void btnOKUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOKUsersMouseClicked
 
         if (filesUsers != null) {
@@ -479,6 +492,9 @@ public class Home extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnOKUsersMouseClicked
 
+    /**
+     * Read each information about the others data then users information.
+     */
     private void btnEnviarDadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnviarDadosMouseClicked
         try {
             if (filesData.length == 3 && filesData != null) {

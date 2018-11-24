@@ -128,40 +128,77 @@ public class User extends Node {
     /**
      * Return the role of the user on the company.
      *
-     * @return
+     * @return return the role of the user.
      */
     public String getRole() {
         return role;
     }
 
+    /** Set the role of the user.
+     * 
+     * @param role The role of the user.
+     */
     public void setRole(String role) {
         this.role = role;
     }
 
+    /**
+     * Return the date.
+     * 
+     * @return return the date.
+     */
     public Date getDate() {
         return date;
     }
 
+    /**
+     * Set the date.
+     * 
+     * @param date new date.
+     */
     public void setDate(Date date) {
         this.date = date;
     }
 
+    /**
+     * Return the start date period.
+     * 
+     * @return return the start date period.
+     */
     public String getStart_date() {
         return start_date;
     }
 
+    /**
+     * Set a new start date.
+     * 
+     * @param start_date new start date.
+     */
     public void setStart_date(String start_date) {
         this.start_date = start_date;
     }
 
+    /**
+     * Return the end date.
+     * 
+     * @return return the end date.
+     */
     public String getEnd_date() {
         return end_date;
     }
 
+    /**
+     * Set a new end date.
+     * 
+     * @param end_date a new end date.
+     */
     public void setEnd_date(String end_date) {
         this.end_date = end_date;
     }
 
+    /**
+     * Print informations about the user.
+     */
     @Override
     public String toString() {
         return "User{" + "name=" + name + ", domain=" + domain + ", email=" + email + ", role=" + role + ", date=" + date + ", start_date=" + start_date + ", end_date=" + end_date + '}';
