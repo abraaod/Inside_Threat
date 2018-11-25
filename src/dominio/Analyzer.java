@@ -100,7 +100,7 @@ public class Analyzer {
         while (lista.hasNext()) {
             User aux = lista.next();
             if (type) {
-                if (aux.getRole().equals(category)) {
+                if (aux.getRole().equalsIgnoreCase(category)) {
                     collection.add(aux);
                 }
             } else {

@@ -177,59 +177,6 @@ public class Tree_insiders {
         return lista_user;
     }
 
-    /*public void insertLogon(Logon logon) {
-		User user = hash_user.get(logon.getUser());
-		Date date = user.getDate();
-		if(date != null) {
-			if(date.getId().equals("aggregate")) {
-				Device device = user.getDate().getHash_table().get(logon.getDevice());
-				if(device != null) {
-					device.addLogon(logon.getId(), logon);
-				}
-			} else if(date.insideInterval(logon.getDate())) {
-				Device device = user.getDate().getHash_table().get(logon.getDevice());
-				if(device != null) {
-					device.addLogon(logon.getId(), logon);
-				}
-			}
-		}
-	}
-	
-	public void insertHttp(Http http) {
-		User user = hash_user.get(http.getUser());
-		Date date = user.getDate();
-		if(date != null) {
-			if(date.getId().equals("aggregate")) {
-				Device device = user.getDate().getHash_table().get(http.getDevice());
-				if(device != null) {
-					device.addHttp(http.getId(), http);
-				}
-			} else if(date.insideInterval(http.getDate())) {
-				Device device = user.getDate().getHash_table().get(http.getDevice());
-				if(device != null) {
-					device.addHttp(http.getId(), http);
-				}
-			}
-		}
-	}
-	
-	public void insertInput(Input input) {
-		User user = hash_user.get(input.getUser());
-		Date date = user.getDate();
-		if(date != null) {
-			if(date.getId().equals("aggregate")) {
-				Device device = user.getDate().getHash_table().get(input.getDevice());
-				if(device != null) {
-					device.addInput(input.getId(), input);
-				}
-			} else if(date.insideInterval(input.getDate())) {
-				Device device = user.getDate().getHash_table().get(input.getDevice());
-				if(device != null) {
-					device.addInput(input.getId(), input);
-				}
-			}
-		}
-	}*/
     /**
      *
      * Retornar o hashmap com com id e o usuários.

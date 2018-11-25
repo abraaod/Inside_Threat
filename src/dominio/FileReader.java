@@ -51,6 +51,48 @@ public class FileReader {
         }
 
     }
+    
+    /**
+     * Realiza a leitura dos arquivos com as informações dos usuários.
+     *
+     * @param tree árvore a qual será gerado os dados.
+     * @param FileName arquivo com os dados para a leitura.
+     */
+    public void read_ldap(Tree_insiders tree, File FileName, String dt_st, String dt_end) {
+
+        FileInputStream file = null;
+        BufferedReader br = null;
+        try {
+            file = new FileInputStream(FileName);
+            br = new BufferedReader(new InputStreamReader(file));
+
+            // jump first line
+            br.readLine();
+
+            String sNull = "";
+
+            while ((sNull = br.readLine()) != null) {
+                String text = sNull;
+                String[] spliter = text.split(",");
+                User user = new User(spliter[0], spliter[1], spliter[2], spliter[3], spliter[4], dt_st, dt_end);
+                tree.insertUser(user);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (file != null) {
+                try {
+                    file.close();
+                    br.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
 
     /**
      * Realiza a leitura dos dados dos dispositivos.

@@ -10,6 +10,7 @@ import dominio.Device;
 import dominio.FileReader;
 import dominio.Tree_insiders;
 import dominio.User;
+import java.awt.Cursor;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,6 +18,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,6 +36,10 @@ public class Home extends javax.swing.JFrame {
     File[] filesData;
     Tree_insiders tree;
     FileReader filereader;
+    User user1;
+    User user2;
+    private Cursor waitCursor;
+    private Cursor defaultCursor;
 
     /**
      * Creates new form Home
@@ -42,7 +48,11 @@ public class Home extends javax.swing.JFrame {
         initComponents();
         tree = new Tree_insiders();
         filereader = new FileReader();
+        
+        waitCursor = new Cursor(Cursor.WAIT_CURSOR);
+        defaultCursor = new Cursor(Cursor.DEFAULT_CURSOR);
 
+        btnSave.setEnabled(false);
         btnGerar.setEnabled(false);
         btnUtilizacao.setEnabled(false);
         btnEnviarDados.setEnabled(false);
@@ -87,16 +97,16 @@ public class Home extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        lblUser1 = new javax.swing.JLabel();
+        txtUser1 = new javax.swing.JTextField();
+        lblUser2 = new javax.swing.JLabel();
+        txtUser2 = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         btnGerar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnSave = new javax.swing.JButton();
+        btnOpen = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Inside Threat");
@@ -334,33 +344,32 @@ public class Home extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
         jLabel6.setText("INSIDE THREAT");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(180, 180, 180)
-                .addComponent(jLabel6)
-                .addContainerGap(350, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(273, Short.MAX_VALUE)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(227, 227, 227))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel6)
-                .addContainerGap(14, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addGap(0, 25, Short.MAX_VALUE)
+                .addComponent(jLabel6))
         );
 
         jPanel8.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel10.setText("3. Insira o id do(os) usuário(os):");
 
-        jLabel11.setText("Usuário 1:*");
+        lblUser1.setText("Usuário 1:*");
 
-        jLabel12.setText("Usuário 2:");
+        lblUser2.setText("Usuário 2:");
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
@@ -394,12 +403,12 @@ public class Home extends javax.swing.JFrame {
                             .addGroup(jPanel8Layout.createSequentialGroup()
                                 .addGap(20, 20, 20)
                                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel11)
-                                    .addComponent(jLabel12))
+                                    .addComponent(lblUser1)
+                                    .addComponent(lblUser2))
                                 .addGap(28, 28, 28)
                                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
-                                    .addComponent(jTextField5)))
+                                    .addComponent(txtUser1, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
+                                    .addComponent(txtUser2)))
                             .addGroup(jPanel8Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel5)))
@@ -412,12 +421,12 @@ public class Home extends javax.swing.JFrame {
                 .addComponent(jLabel10)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblUser1)
+                    .addComponent(txtUser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblUser2)
+                    .addComponent(txtUser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -428,32 +437,32 @@ public class Home extends javax.swing.JFrame {
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
 
-        jButton2.setText("Salvar Perfis");
+        btnSave.setText("Salvar Perfis");
 
-        jButton3.setText("Abrir Perfis");
-        jButton3.setMaximumSize(new java.awt.Dimension(93, 23));
-        jButton3.setMinimumSize(new java.awt.Dimension(93, 23));
-        jButton3.setPreferredSize(new java.awt.Dimension(93, 23));
+        btnOpen.setText("Abrir Perfis");
+        btnOpen.setMaximumSize(new java.awt.Dimension(93, 23));
+        btnOpen.setMinimumSize(new java.awt.Dimension(93, 23));
+        btnOpen.setPreferredSize(new java.awt.Dimension(93, 23));
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(227, 227, 227)
-                .addComponent(jButton2)
-                .addGap(35, 35, 35)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addGap(183, 183, 183)
+                .addComponent(btnSave)
+                .addGap(64, 64, 64)
+                .addComponent(btnOpen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap(13, Short.MAX_VALUE)
+                .addContainerGap(15, Short.MAX_VALUE)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(13, 13, 13))
+                    .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnOpen, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -516,13 +525,18 @@ public class Home extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGerarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGerarMouseClicked
-        //tree.createDiagram();
+        if (filesData != null && filesUsers != null && btnGerar.isEnabled()) {
+            tree.createDiagram();
 
-        final HistogramLines demo = new HistogramLines("Ações do Usuário", "Segurança");
-        demo.pack();
-        RefineryUtilities.centerFrameOnScreen(demo);
-        demo.setVisible(true);
-        
+            user1 = tree.getSpecificUser(txtUser1.getText());
+            user2 = tree.getSpecificUser(txtUser2.getText());
+
+            final HistogramLines demo = new HistogramLines("Ações do Usuário", user1, user2);
+            demo.pack();
+            RefineryUtilities.centerFrameOnScreen(demo);
+            demo.setVisible(true);
+        }
+
         /*try {
 
             if (filesData.length == 3 && filesData != null && filesUsers != null) {
@@ -644,6 +658,7 @@ public class Home extends javax.swing.JFrame {
     private void btnOKUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOKUsersMouseClicked
 
         if (filesUsers != null && btnOKUsers.isEnabled()) {
+            this.setCursor(waitCursor);
             System.out.println("Começou a ler o LDAP");
             for (File f : filesUsers) {
                 filereader.read_ldap(tree, f);
@@ -654,6 +669,7 @@ public class Home extends javax.swing.JFrame {
             btnOKUsers.setEnabled(false);
             btnEnviarDados.setEnabled(true);
             btnSelectFiles.setEnabled(false);
+            this.setCursor(defaultCursor);
         }
     }//GEN-LAST:event_btnOKUsersMouseClicked
 
@@ -662,6 +678,7 @@ public class Home extends javax.swing.JFrame {
      */
     private void btnEnviarDadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnviarDadosMouseClicked
         if (btnEnviarDados.isEnabled()) {
+            this.setCursor(waitCursor);
             try {
                 if (filesData.length == 3 && filesData != null) {
                     for (File f : filesData) {
@@ -683,6 +700,7 @@ public class Home extends javax.swing.JFrame {
                     btnGerar.setEnabled(true);
                     btnEnviarDados.setEnabled(false);
                     System.out.println("Leitura realizada de tudo!");
+                    this.setCursor(defaultCursor);
                 }
             } catch (NullPointerException ex) {
                 ex.printStackTrace();
@@ -757,14 +775,12 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton btnEnviarDados;
     private javax.swing.JButton btnGerar;
     private javax.swing.JButton btnOKUsers;
+    private javax.swing.JButton btnOpen;
+    private javax.swing.JButton btnSave;
     private javax.swing.JButton btnSelectFiles;
     private javax.swing.JButton btnUtilizacao;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -779,14 +795,14 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JLabel lblDataFim;
     private javax.swing.JLabel lblDataInicio;
     private javax.swing.JLabel lblDatasInfo;
     private javax.swing.JLabel lblObsFiles;
     private javax.swing.JLabel lblOrdenar;
     private javax.swing.JLabel lblSelectFiles;
+    private javax.swing.JLabel lblUser1;
+    private javax.swing.JLabel lblUser2;
     private javax.swing.JLabel lblVersion;
     private javax.swing.JRadioButton rbData;
     private javax.swing.ButtonGroup rbFiltro;
@@ -794,5 +810,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JRadioButton rbTudo;
     private javax.swing.JFormattedTextField txtDataFinal;
     private javax.swing.JFormattedTextField txtDataInicio;
+    private javax.swing.JTextField txtUser1;
+    private javax.swing.JTextField txtUser2;
     // End of variables declaration//GEN-END:variables
 }
