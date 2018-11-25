@@ -3,7 +3,7 @@ import java.io.*;
 
 public class FileReader{
 	
-	public void read_ldap(Tree_insiders tree, String FileName) {
+	public void read_ldap(Tree_insiders tree, String FileName, String data_ini, String data_end) {
 
 		FileInputStream file = null;
 		BufferedReader br = null;
@@ -19,7 +19,7 @@ public class FileReader{
 			while ((sNull = br.readLine()) != null) {
 				String text = sNull;
 				String[] spliter = text.split(",");
-				User user = new User(spliter[0], spliter[1], spliter[2], spliter[3], spliter[4]);
+				User user = new User(spliter[0], spliter[1], spliter[2], spliter[3], spliter[4], data_ini, data_end);
 				tree.insertUser(user);
 				// System.out.println(text);
 			}
@@ -57,8 +57,8 @@ public class FileReader{
 				String[] date_id = spliter[1].split(" ");
 				String hours = date_id[1];
 				String[] user_id = spliter[2].split("/");
-				Date date = new Date(date_id[0], user_id[1]);
-				tree.insertDate(date);
+				/*Date date = new Date(date_id[0], user_id[1]);
+				tree.insertDate(date);*/
 				Device device = new Device(spliter[3], user_id[1], date_id[0]);
 				tree.insertDevice(device);
 				if(spliter[4].equalsIgnoreCase("connect")) {
