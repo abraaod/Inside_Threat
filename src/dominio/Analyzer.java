@@ -11,10 +11,11 @@ import java.util.Vector;
  */
 public class Analyzer {
 
-    /** Cria diagrama de usuário analisando os dispositivos.
-     * 
+    /**
+     * Cria diagrama de usuário analisando os dispositivos.
+     *
      * @param user Usuário a realizar a analise..
-     * 
+     *
      */
     public int[] createUserDiagram(User user) {
         Date date = user.getDate();
@@ -30,31 +31,39 @@ public class Analyzer {
                     hist[i] += hist_device[i];
                 }
             }
-            
+
             user.setHist(percentageDiagram(hist));
             return percentageDiagram(hist);
         }
         return null;
     }
 
-    /** Definir a porcentagem do diagrama.
-     * 
+    /**
+     * Definir a porcentagem no diagrama.
+     *
      * @param hist recebe os valores do histograma.
      * @return retorna o novo valor após a conversão.
      */
     public int[] percentageDiagram(int[] hist) {
-        int sum = 0;
-        for (int i = 0; i < hist.length; i++) {
-            sum += hist[i];
-        }
-        for (int i = 0; i < hist.length; i++) {
-            hist[i] = ((hist[i] * 100) / sum);
+        try {
+            int sum = 0;
+            for (int i = 0; i < hist.length; i++) {
+                sum += hist[i];
+            }
+            for (int i = 0; i < hist.length; i++) {
+                if(sum == 0)
+                    sum = 1;
+                hist[i] = ((hist[i] * 100) / sum);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
         return hist;
     }
 
-    /** Cria um histograma por dispositivo.
-     * 
+    /**
+     * Cria um histograma por dispositivo.
+     *
      * @param device recebe o dispositivo a ser realizado a analise.
      * @return retorna o histograma (distribuido em 24 horas).
      */
@@ -84,11 +93,13 @@ public class Analyzer {
 
     }
 
-    /** Realiza uma analise por categoria.
-     * 
+    /**
+     * Realiza uma analise por categoria.
+     *
      * @param lista_user Lista com os todos os usuários.
      * @param category qual categoria a ser analisada.
-     * @param type Verdadeiro se deve considerar a categoria ou falso uma data (ou intervalo de datas).
+     * @param type Verdadeiro se deve considerar a categoria ou falso uma data
+     * (ou intervalo de datas).
      * @return retorna uma coleção de usuarios.
      */
     public Collection<User> analyzerByCategory(Collection<User> lista_user, String category, boolean type) {

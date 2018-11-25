@@ -5,6 +5,7 @@
  */
 package visao;
 
+import controle.NullSpecificUser;
 import dominio.Date;
 import dominio.Device;
 import dominio.FileReader;
@@ -78,7 +79,6 @@ public class Home extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         btnUtilizacao = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        btnOKUsers = new javax.swing.JButton();
         btnEnviarDados = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         lblDataInicio = new javax.swing.JLabel();
@@ -86,6 +86,7 @@ public class Home extends javax.swing.JFrame {
         txtDataInicio = new javax.swing.JFormattedTextField();
         txtDataFinal = new javax.swing.JFormattedTextField();
         lblDatasInfo = new javax.swing.JLabel();
+        btnOKUsers = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         lblVersion = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
@@ -145,13 +146,6 @@ public class Home extends javax.swing.JFrame {
 
         jLabel4.setText("Selecione os dados de utilização dos usuários.");
 
-        btnOKUsers.setText("Enviar");
-        btnOKUsers.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnOKUsersMouseClicked(evt);
-            }
-        });
-
         btnEnviarDados.setText("Enviar");
         btnEnviarDados.setEnabled(false);
         btnEnviarDados.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -179,9 +173,7 @@ public class Home extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(btnSelectFiles, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnOKUsers, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
-                            .addComponent(btnEnviarDados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btnEnviarDados, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
@@ -198,7 +190,6 @@ public class Home extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSelectFiles)
                     .addComponent(jLabel1)
-                    .addComponent(btnOKUsers)
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -222,7 +213,14 @@ public class Home extends javax.swing.JFrame {
         txtDataFinal.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.MEDIUM))));
 
         lblDatasInfo.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        lblDatasInfo.setText("Insira as datas no formato: dd/MM/yyyy");
+        lblDatasInfo.setText("Insira as datas no formato: MM/dd/yyyy");
+
+        btnOKUsers.setText("Enviar");
+        btnOKUsers.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnOKUsersMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -238,19 +236,26 @@ public class Home extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtDataInicio)
                     .addComponent(txtDataFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(87, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnOKUsers, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblDataInicio)
-                    .addComponent(txtDataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblDataFim)
-                    .addComponent(txtDataFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnOKUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblDataInicio)
+                            .addComponent(txtDataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblDataFim)
+                            .addComponent(txtDataFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblDatasInfo)
                 .addContainerGap(16, Short.MAX_VALUE))
@@ -282,11 +287,6 @@ public class Home extends javax.swing.JFrame {
         rbData.setBackground(new java.awt.Color(255, 255, 255));
         rbFiltro.add(rbData);
         rbData.setText("Data específica");
-        rbData.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                rbDataItemStateChanged(evt);
-            }
-        });
         rbData.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbDataActionPerformed(evt);
@@ -525,97 +525,26 @@ public class Home extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGerarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGerarMouseClicked
+        try{
         if (filesData != null && filesUsers != null && btnGerar.isEnabled()) {
             tree.createDiagram();
-
+            
             user1 = tree.getSpecificUser(txtUser1.getText());
             user2 = tree.getSpecificUser(txtUser2.getText());
+            
+            if(user1 == null)
+                throw new NullSpecificUser("Usuário não encontrado!");
 
             final HistogramLines demo = new HistogramLines("Ações do Usuário", user1, user2);
             demo.pack();
             RefineryUtilities.centerFrameOnScreen(demo);
             demo.setVisible(true);
         }
-
-        /*try {
-
-            if (filesData.length == 3 && filesData != null && filesUsers != null) {
-
-                if (rbPeriodo.isSelected()) {
-                    if (txtDataFinal.getText().isEmpty() || txtDataInicio.getText().isEmpty()) {
-                        JOptionPane.showMessageDialog(this, "Verifique a data de inicio e final!", "Erro!", JOptionPane.ERROR_MESSAGE);
-                    } else {
-
-                        // Do Something.
-                    }
-
-                } else if (rbData.isSelected()) {
-                    if (txtDataInicio.getText().isEmpty()) {
-                        JOptionPane.showMessageDialog(this, "Há data faltando!", "Erro!", JOptionPane.ERROR_MESSAGE);
-                    } else {
-
-                        // Do Something.
-                    }
-                }
-
-                System.out.println("Terminou de ler tudo!");
-                tree.users();
-
-            } else {
-                if (filesData.length < 3 || filesData == null) {
-                    JOptionPane.showMessageDialog(this, "Você não selecionou todos os arquivos", "Erro!", JOptionPane.ERROR_MESSAGE);
-                } else {
-                    JOptionPane.showMessageDialog(this, "São 3 arquivos, você inseriu mais!", "Erro!", JOptionPane.ERROR_MESSAGE);
-                }
-
-            }
-        } catch (NullPointerException ex) {
+        } catch(NullSpecificUser ex){
             ex.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Não foi selecionado nenhum arquivo!", "Erro!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Não foi possível encontrar o usuário!", "Erro!", JOptionPane.ERROR_MESSAGE);
         }
-         */
     }//GEN-LAST:event_btnGerarMouseClicked
-
-    /**
-     * Working with the radio buttons. Make that the user only use what's
-     * necessary.
-     */
-    private void rbDataItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbDataItemStateChanged
-        /*int data_esp = 0;
-
-        if (rbData.isSelected()) {
-            data_esp = 1;
-            System.out.println("Data");
-        } else if (rbPeriodo.isSelected()) {
-            data_esp = 0;
-            System.out.println("Periodo");
-        } else if (rbTudo.isSelected()) {
-            data_esp = 2;
-            System.out.println("Tudo");
-        }
-
-        switch (data_esp) {
-            case 1:
-                lblDataInicio.setText("Data:");
-                txtDataFinal.setEnabled(false);
-                txtDataInicio.setEnabled(true);
-                break;
-            case 0:
-                lblDataInicio.setText("Data(início):");
-                txtDataFinal.setEnabled(true);
-                txtDataInicio.setEnabled(true);
-                break;
-            case 2:
-                if (txtDataFinal.isEnabled() && txtDataInicio.isEnabled()) {
-                    txtDataFinal.setEnabled(false);
-                    txtDataInicio.setEnabled(false);
-                }
-                break;
-            default:
-                break;
-        }*/
-
-    }//GEN-LAST:event_rbDataItemStateChanged
 
     /**
      * Open a JFrame to select multiple files about the Users informations.
@@ -660,8 +589,23 @@ public class Home extends javax.swing.JFrame {
         if (filesUsers != null && btnOKUsers.isEnabled()) {
             this.setCursor(waitCursor);
             System.out.println("Começou a ler o LDAP");
+            
+            String dataInicio = "";
+            String dataFinal = "";
+            
+            if(rbPeriodo.isSelected()){
+                dataInicio = txtDataInicio.getText();
+                dataFinal = txtDataFinal.getText();
+            } else if(rbData.isSelected()){
+                dataInicio = txtDataInicio.getText();
+                dataFinal = txtDataInicio.getText();
+            } else {
+                dataInicio = "01/01/1900";
+                dataFinal = "11/25/2018";
+            }
+            
             for (File f : filesUsers) {
-                filereader.read_ldap(tree, f);
+                filereader.read_ldap(tree, f, dataInicio, dataFinal);
             }
             System.out.println("Terminou de ler o LDAP");
 

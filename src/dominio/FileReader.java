@@ -117,8 +117,8 @@ public class FileReader {
                 String[] date_id = spliter[1].split(" ");
                 String hours = date_id[1];
                 String[] user_id = spliter[2].split("/");
-                Date date = new Date(date_id[0], user_id[1]);
-                tree.insertDate(date);
+                /*Date date = new Date(date_id[0], user_id[1]);
+                tree.insertDate(date);*/
                 Device device = new Device(spliter[3], user_id[1], date_id[0]);
                 tree.insertDevice(device);
                 if (spliter[4].equalsIgnoreCase("connect")) {
