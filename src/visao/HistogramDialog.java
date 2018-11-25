@@ -70,7 +70,7 @@ public class HistogramDialog extends javax.swing.JFrame {
         jpnGrafico.setLayout(jpnGraficoLayout);
         jpnGraficoLayout.setHorizontalGroup(
             jpnGraficoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 589, Short.MAX_VALUE)
+            .addGap(0, 633, Short.MAX_VALUE)
         );
         jpnGraficoLayout.setVerticalGroup(
             jpnGraficoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

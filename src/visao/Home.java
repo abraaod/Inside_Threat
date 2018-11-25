@@ -54,7 +54,6 @@ public class Home extends javax.swing.JFrame {
 
         rbFiltro = new javax.swing.ButtonGroup();
         jPanel5 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         lblSelectFiles = new javax.swing.JLabel();
         btnSelectFiles = new javax.swing.JButton();
@@ -80,14 +79,13 @@ public class Home extends javax.swing.JFrame {
         rbPeriodo = new javax.swing.JRadioButton();
         rbTudo = new javax.swing.JRadioButton();
         lblOrdenar = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel6.setText("INSIDE THREAT");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -157,7 +155,7 @@ public class Home extends javax.swing.JFrame {
                                 .addComponent(btnSelectFiles, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnOKUsers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnOKUsers, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
                             .addComponent(btnEnviarDados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -277,15 +275,30 @@ public class Home extends javax.swing.JFrame {
                 rbDataItemStateChanged(evt);
             }
         });
+        rbData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbDataActionPerformed(evt);
+            }
+        });
 
         rbPeriodo.setBackground(new java.awt.Color(255, 255, 255));
         rbFiltro.add(rbPeriodo);
         rbPeriodo.setSelected(true);
         rbPeriodo.setText("Período entre datas");
+        rbPeriodo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbPeriodoActionPerformed(evt);
+            }
+        });
 
         rbTudo.setBackground(new java.awt.Color(255, 255, 255));
         rbFiltro.add(rbTudo);
         rbTudo.setText("Tudo");
+        rbTudo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbTudoActionPerformed(evt);
+            }
+        });
 
         lblOrdenar.setText("2. Como deseja filtrar?");
 
@@ -318,6 +331,28 @@ public class Home extends javax.swing.JFrame {
                 .addComponent(rbData))
         );
 
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel6.setText("INSIDE THREAT");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(180, 180, 180)
+                .addComponent(jLabel6)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel6)
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -329,18 +364,15 @@ public class Home extends javax.swing.JFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(jLabel6)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(19, 19, 19)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -367,6 +399,7 @@ public class Home extends javax.swing.JFrame {
 
     private void btnGerarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGerarMouseClicked
         //tree.createDiagram();
+
         new HistogramDialog().setVisible(true);
         /*try {
 
@@ -404,23 +437,25 @@ public class Home extends javax.swing.JFrame {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(this, "Não foi selecionado nenhum arquivo!", "Erro!", JOptionPane.ERROR_MESSAGE);
         }
-*/
+         */
     }//GEN-LAST:event_btnGerarMouseClicked
 
-    
     /**
-     * Working with the radio buttons. Make that the user only use what's necessary.
+     * Working with the radio buttons. Make that the user only use what's
+     * necessary.
      */
     private void rbDataItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbDataItemStateChanged
-
-        int data_esp = 0;
+        /*int data_esp = 0;
 
         if (rbData.isSelected()) {
             data_esp = 1;
+            System.out.println("Data");
         } else if (rbPeriodo.isSelected()) {
             data_esp = 0;
+            System.out.println("Periodo");
         } else if (rbTudo.isSelected()) {
             data_esp = 2;
+            System.out.println("Tudo");
         }
 
         switch (data_esp) {
@@ -442,7 +477,7 @@ public class Home extends javax.swing.JFrame {
                 break;
             default:
                 break;
-        }
+        }*/
 
     }//GEN-LAST:event_rbDataItemStateChanged
 
@@ -523,6 +558,23 @@ public class Home extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnEnviarDadosMouseClicked
 
+    private void rbPeriodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbPeriodoActionPerformed
+        txtDataFinal.enable(true);
+        txtDataInicio.enable(true);
+        lblDataInicio.setText("Data (início):");
+    }//GEN-LAST:event_rbPeriodoActionPerformed
+
+    private void rbTudoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbTudoActionPerformed
+        txtDataFinal.enable(false);
+        txtDataInicio.enable(false);
+    }//GEN-LAST:event_rbTudoActionPerformed
+
+    private void rbDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbDataActionPerformed
+        txtDataFinal.enable(false);
+        txtDataInicio.enable(true);
+        lblDataInicio.setText("Data:");
+    }//GEN-LAST:event_rbDataActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -580,6 +632,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JLabel lblDataFim;

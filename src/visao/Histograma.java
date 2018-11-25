@@ -44,7 +44,7 @@ public class Histograma extends JFrame{
         
         ChartPanel painelGrafico = new ChartPanel(grafico);
         
-        painelGrafico.setPreferredSize(new Dimension(400, 400));
+        painelGrafico.setPreferredSize(new Dimension(700, 400));
         
         return painelGrafico;
     }

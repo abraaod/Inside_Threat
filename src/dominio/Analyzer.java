@@ -16,7 +16,7 @@ public class Analyzer {
      * @param user Usuário a realizar a analise..
      * 
      */
-    public void createUserDiagram(User user) {
+    public int[] createUserDiagram(User user) {
         Date date = user.getDate();
         Collection<Device> lista_devices;
         if (date != null) {
@@ -32,7 +32,9 @@ public class Analyzer {
             }
             
             user.setHist(percentageDiagram(hist));
+            return percentageDiagram(hist);
         }
+        return null;
     }
 
     /** Definir a porcentagem do diagrama.
