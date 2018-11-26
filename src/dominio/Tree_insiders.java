@@ -246,9 +246,13 @@ public class Tree_insiders {
             if(aux.getRole().equals(role)){
                 qnt++;
                 for( int i = 0; i < aux.getHist().length; i++){
-                    hist[i] = aux.getHist()[i];
+                    hist[i] += aux.getHist()[i];
                 }
             }
+        }
+        
+        for(int i = 0; i < hist.length; i++) {
+        	hist[i] /= qnt;
         }
         role_.setHist(hist);
         return role_;
