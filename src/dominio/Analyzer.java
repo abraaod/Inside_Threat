@@ -10,7 +10,23 @@ import java.util.Vector;
  * @author Abraao
  */
 public class Analyzer {
-
+	
+	
+	public Tree_insiders tree;
+	
+	/**
+	 * Construtor da classe Analyzer
+	 * @param tree {@link Tree_insiders}
+	 * */
+	public Analyzer(Tree_insiders tree) {
+		this.tree = tree;
+	}
+	/**
+	 * Construtor default
+	 * */
+	public Analyzer() {
+		
+	}
     /**
      * Cria diagrama de usuário analisando os dispositivos.
      *
@@ -123,5 +139,47 @@ public class Analyzer {
         }
 
         return collection;
+    }
+    
+    public void findAnomaly(Collection<User> lista_user) {
+    	
+    	Iterator<User> it = lista_user.iterator();
+    	User aux = it.next();
+    	User media = tree.medianRoles(aux.getRole());
+    	double distance = 0;
+    	
+    	while(it.hasNext()) {
+    		for(int i = 0; i < media.getHist().length; i++) {
+    			distance += Math.pow((aux.getHist()[i] - media.getHist()[i]), 2);
+    		}
+    		
+    		distance = Math.sqrt(distance);
+    		if(it.hasNext()) {
+    			aux = it.next();
+    		}
+    	}
+    }
+    
+ public void findAnomaly(User user) {
+    	User media = tree.medianRoles(user.getRole());
+    	double distance = 0;
+    	for(int i = 0; i < media.getHist().length; i++) {
+			distance += Math.pow((user.getHist()[i] - media.getHist()[i]), 2);
+		}
+    	
+    	distance = Math.sqrt(distance);
+    	int [] hist = user.getHist();
+    	double iqr = 1.5 * IQR(hist);
+    	System.out.println(distance);
+    	System.out.println(iqr);
+    }
+    
+    public double IQR(int [] hist) {
+    	
+    	Arrays.sort(hist);
+    	double Q1 = hist[(hist.length + 1)/4];
+    	double Q3 = hist[(3 * (hist.length + 1))/4];
+    	
+    	return Q3 - Q1;
     }
 }
