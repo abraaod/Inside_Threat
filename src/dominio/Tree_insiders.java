@@ -234,4 +234,23 @@ public class Tree_insiders {
         }
         System.out.println(lista.size());
     }
+    
+    public User medianRoles(String role){
+        User role_ = new User("", "Media", "", "", role);
+        Collection<User> lista = hash_user.values();
+        Iterator<User> users = lista.iterator();
+        int qnt = 0;
+        int[] hist = new int[24];
+        while(users.hasNext()){
+            User aux = users.next();
+            if(aux.getRole().equals(role)){
+                qnt++;
+                for( int i = 0; i < aux.getHist().length; i++){
+                    hist[i] = aux.getHist()[i];
+                }
+            }
+        }
+        role_.setHist(hist);
+        return role_;
+    }
 }
