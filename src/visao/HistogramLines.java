@@ -5,6 +5,7 @@
  */
 package visao;
 
+import dominio.Analyzer;
 import dominio.User;
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
@@ -24,6 +25,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.block.BlockBorder;
+import org.jfree.chart.event.AnnotationChangeListener;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.AbstractRenderer;
 import org.jfree.chart.renderer.xy.StandardXYItemRenderer;
@@ -57,7 +59,7 @@ public class HistogramLines extends JFrame implements ActionListener {
         } else {
             role_ = "Role: " + user1.getRole();
         }
-
+        
         final TimeSeriesCollection dataset1 = createDatabase(user1);
         final JFreeChart chart = ChartFactory.createTimeSeriesChart(
                 role_, "Horário", "Ações dos Usuários", dataset1, true, false, false);

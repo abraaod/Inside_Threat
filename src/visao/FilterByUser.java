@@ -6,6 +6,7 @@
 package visao;
 
 import controle.NullSpecificUser;
+import dominio.Analyzer;
 import dominio.Tree_insiders;
 import dominio.User;
 import javax.swing.JOptionPane;
@@ -130,7 +131,10 @@ public class FilterByUser extends javax.swing.JFrame {
            if(user2 == null){
                user2 = tree.medianRoles(user1.getRole());
            }
-
+           	
+           	/*Analyzer analyzer = new Analyzer(tree);
+           	analyzer.findAnomaly(user1);*/
+        
             final HistogramLines demo = new HistogramLines("Ações do Usuário", user1, user2);
             demo.pack();
             RefineryUtilities.centerFrameOnScreen(demo);
