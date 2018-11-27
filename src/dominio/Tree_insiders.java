@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.Vector;
 
 public class Tree_insiders {
 
@@ -220,6 +221,12 @@ public class Tree_insiders {
         Analyzer analyzer = new Analyzer();
         Collection<User> lista_user = hash_user.values();
         lista_user = analyzer.analyzerByCategory(lista_user, category, type);
+    }
+    
+    public Vector<Distance> analyzerInsiders(){
+        Analyzer analyzer = new Analyzer();
+        Vector<Distance> vect = analyzerInsiders();
+        return vect;
     }
 
     /**

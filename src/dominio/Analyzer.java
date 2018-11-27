@@ -2,6 +2,8 @@ package dominio;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Vector;
 
@@ -176,6 +178,15 @@ public class Analyzer {
     		}
     		distance = 0;
     	}
+        
+        
+        Collections.sort(anomaly_users, (Distance o1, Distance o2) -> o1.compareTo(o2));
+        
+        System.out.println(anomaly_users);
+    }
+    
+    public boolean comparador(Distance a, Distance c){
+        return a.distance < c.distance;
     }
     
  public void findAnomaly(User user) {
