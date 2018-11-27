@@ -147,16 +147,34 @@ public class Analyzer {
     	User aux = it.next();
     	User media = tree.medianRoles(aux.getRole());
     	double distance = 0;
+    	Vector<Double> distances = new Vector<>();
+    	Vector<Distance> anomaly_users = new Vector<>();
     	
     	while(it.hasNext()) {
     		for(int i = 0; i < media.getHist().length; i++) {
     			distance += Math.pow((aux.getHist()[i] - media.getHist()[i]), 2);
     		}
     		
-    		distance = Math.sqrt(distance);
+    		distances.add(Math.sqrt(distance));
+    		distance = 0;
     		if(it.hasNext()) {
     			aux = it.next();
     		}
+    	}
+    	
+    	double iqr = IQR(distances);
+    	
+    	it = lista_user.iterator();
+    	while(it.hasNext()) {
+    		User aux2 = it.next();
+    		for(int i = 0; i < media.getHist().length; i++) {
+    			distance += Math.pow((aux2.getHist()[i] - media.getHist()[i]), 2);
+    		}
+    		if(1.5 * iqr > Math.sqrt(distance)){
+    			Distance dis = new Distance(aux2, Math.sqrt(distance));
+    			anomaly_users.add(dis);
+    		}
+    		distance = 0;
     	}
     }
     
@@ -179,6 +197,15 @@ public class Analyzer {
     	Arrays.sort(hist);
     	double Q1 = hist[(hist.length + 1)/4];
     	double Q3 = hist[(3 * (hist.length + 1))/4];
+    	
+    	return Q3 - Q1;
+    }
+    
+ public double IQR(Vector<Double> distance) {
+	 	
+    	Arrays.sort(distance.toArray());
+    	double Q1 = distance.get((distance.size() + 1)/4);
+    	double Q3 = distance.get((3 * (distance.size() + 1))/4);
     	
     	return Q3 - Q1;
     }
