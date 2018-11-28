@@ -122,10 +122,11 @@ public class Analyzer {
 	 *                   (ou intervalo de datas).
 	 * @return retorna uma coleção de usuarios.
 	 */
-	public Collection<User> analyzerByCategory(Collection<User> lista_user, String category, boolean type) {
+	public Vector<User> analyzerByCategory(String category, boolean type) {
 
 		// type true represents user groupping by role, false represents by date
-		Collection<User> collection = null;
+		Collection<User> lista_user = tree.getHash_user().values();
+		Vector<User> collection = new Vector<>();
 		Iterator<User> lista = lista_user.iterator();
 
 		while (lista.hasNext()) {
@@ -145,32 +146,57 @@ public class Analyzer {
 		return collection;
 	}
 
-	
-	
 	public void order(Vector<Distance> lista_distance) {
-		for(int i = 0; i < lista_distance.size() - 1; i++) {
-			for(int j = i + 1; j < lista_distance.size(); j++) {
-				if(lista_distance.get(i).getDistance() < lista_distance.get(j).getDistance()) {
+		for (int i = 0; i < lista_distance.size() - 1; i++) {
+			for (int j = i + 1; j < lista_distance.size(); j++) {
+				if (lista_distance.get(i).getDistance() < lista_distance.get(j).getDistance()) {
 					Distance aux = lista_distance.get(i);
-					lista_distance.insertElementAt(lista_distance.get(j), i);;
-					lista_distance.insertElementAt(aux, j);;
+					lista_distance.insertElementAt(lista_distance.get(j), i);
+					;
+					lista_distance.insertElementAt(aux, j);
+					;
 				}
 			}
 		}
 	}
-	public void findAnomaly(User user) {
-		User media = tree.medianRoles(user.getRole());
-		double distance = 0;
-		for (int i = 0; i < media.getHist().length; i++) {
-			distance += Math.pow((user.getHist()[i] - media.getHist()[i]), 2);
-		}
-                
 
-		distance = Math.sqrt(distance);
-		int[] hist = user.getHist();
-		double iqr = 1.5 * IQR(hist);
-		System.out.println(distance);
-		System.out.println(iqr);
+	public Vector<Distance> findAnomaly(Vector<User> lista, String category) {
+		Iterator<User> it = lista.iterator();// lista_user.iterator();
+		User media = tree.medianRoles(category);
+		double distance = 0;
+		Vector<Double> distances = new Vector<>();
+		Vector<Distance> anomaly_users = new Vector<>();
+		int cont = 0;
+		while (it.hasNext()) {
+			User aux = it.next();
+			for (int i = 0; i < media.getHist().length; i++) {
+				distance += Math.pow((aux.getHist()[i] - media.getHist()[i]), 2);
+			}
+
+			distances.add(Math.sqrt(distance));
+			distance = 0;
+			cont ++;
+		}
+		System.out.println(cont);
+		double iqr = IQR(distances);
+		cont = 0;
+		it = lista.iterator();
+		while (it.hasNext()) {
+			User aux2 = it.next();
+			for (int i = 0; i < media.getHist().length; i++) {
+				distance += Math.pow((aux2.getHist()[i] - media.getHist()[i]), 2);
+			}
+			if (1.5 * iqr > Math.sqrt(distance)) {
+				Distance dis = new Distance(aux2, Math.sqrt(distance));
+				anomaly_users.add(dis);
+			}
+			distance = 0;
+			cont++;
+		}
+		System.out.println(cont + " Final cont");
+		order(anomaly_users);
+		//System.out.println(anomaly_users);
+		return anomaly_users;
 	}
 
 	public double IQR(int[] hist) {

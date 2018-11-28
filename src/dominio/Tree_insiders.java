@@ -217,10 +217,13 @@ public class Tree_insiders {
      * @param type Verdadeiro se for por categoria e false se for por data
      * específica.
      */
-    public void analyzerByCategory(String category, boolean type) {
-        Analyzer analyzer = new Analyzer();
-        Collection<User> lista_user = hash_user.values();
-        lista_user = analyzer.analyzerByCategory(lista_user, category, type);
+    public Vector<Distance> analyzerByCategory(String category, boolean type) {
+        Analyzer analyzer = new Analyzer(this);
+        //Collection<User> lista_user = hash_user.values();
+        Vector<User>lista_user = analyzer.analyzerByCategory(category, type);
+        Vector<Distance> distances = analyzer.findAnomaly(lista_user, category);
+        
+        return distances;
     }
 
     /**
@@ -261,8 +264,8 @@ public class Tree_insiders {
     }
     
     
-    public Vector<Distance> findAnomaly() {
-                Collection<User> lista = hash_user.values();
+    /*public Vector<Distance> findAnomaly() {
+        Collection<User> lista = hash_user.values();
 		Iterator<User> it = lista.iterator();//lista_user.iterator();
 		User aux = it.next();
 		User media = medianRoles(aux.getRole());
@@ -303,7 +306,7 @@ public class Tree_insiders {
 		an.order(anomaly_users);
                 System.out.println(anomaly_users);
                 return anomaly_users;
-	}
+	}*/
     
     
 }

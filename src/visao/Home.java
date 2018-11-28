@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Scanner;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -579,7 +580,14 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNextMouseClicked
 
     private void btnInsidersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInsidersMouseClicked
-        Vector<Distance> lista = tree.findAnomaly();
+        //colocar a string do papel que se deseja pesquisar
+    	Vector<Distance> lista = tree.analyzerByCategory("Engineer", true);
+        System.out.println(lista.size() + "Tamanho de insiders");
+        Iterator<Distance> it = lista.iterator();
+        while(it.hasNext()) {
+        	Distance aux = it.next();
+        	System.out.println(aux.getUser().getName() + " : " + aux.getDistance());
+        }
         Insiders insiders = new Insiders(lista);
         insiders.setVisible(true);
     }//GEN-LAST:event_btnInsidersMouseClicked
