@@ -8,6 +8,7 @@ package visao;
 import controle.NullSpecificUser;
 import dominio.Date;
 import dominio.Device;
+import dominio.Distance;
 import dominio.FileReader;
 import dominio.Tree_insiders;
 import dominio.User;
@@ -21,6 +22,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
@@ -53,7 +55,6 @@ public class Home extends javax.swing.JFrame {
         waitCursor = new Cursor(Cursor.WAIT_CURSOR);
         defaultCursor = new Cursor(Cursor.DEFAULT_CURSOR);
 
-        btnSave.setEnabled(false);
         btnNext.setEnabled(false);
         btnUtilizacao.setEnabled(false);
         btnEnviarDados.setEnabled(false);
@@ -96,8 +97,6 @@ public class Home extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
-        btnSave = new javax.swing.JButton();
-        btnOpen = new javax.swing.JButton();
         btnNext = new javax.swing.JButton();
         btnInsiders = new javax.swing.JButton();
 
@@ -344,13 +343,6 @@ public class Home extends javax.swing.JFrame {
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
 
-        btnSave.setText("Salvar Perfis");
-
-        btnOpen.setText("Abrir Perfis");
-        btnOpen.setMaximumSize(new java.awt.Dimension(93, 23));
-        btnOpen.setMinimumSize(new java.awt.Dimension(93, 23));
-        btnOpen.setPreferredSize(new java.awt.Dimension(93, 23));
-
         btnNext.setText("Próximo");
         btnNext.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -370,25 +362,19 @@ public class Home extends javax.swing.JFrame {
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addGap(52, 52, 52)
                 .addComponent(btnInsiders)
-                .addGap(18, 18, 18)
-                .addComponent(btnOpen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(btnSave)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(159, 159, 159))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                 .addContainerGap(22, Short.MAX_VALUE)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnNext, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
-                    .addComponent(btnSave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnInsiders, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnOpen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnInsiders, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21))
         );
 
@@ -570,7 +556,9 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNextMouseClicked
 
     private void btnInsidersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInsidersMouseClicked
-        tree.analyzerInsiders();
+        Vector<Distance> lista = tree.findAnomaly();
+        Insiders insiders = new Insiders(lista);
+        insiders.setVisible(true);
     }//GEN-LAST:event_btnInsidersMouseClicked
 
     /**
@@ -621,8 +609,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton btnInsiders;
     private javax.swing.JButton btnNext;
     private javax.swing.JButton btnOKUsers;
-    private javax.swing.JButton btnOpen;
-    private javax.swing.JButton btnSave;
     private javax.swing.JButton btnSelectFiles;
     private javax.swing.JButton btnUtilizacao;
     private javax.swing.JLabel jLabel1;

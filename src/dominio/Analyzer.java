@@ -145,44 +145,7 @@ public class Analyzer {
 		return collection;
 	}
 
-	public void findAnomaly(Collection<User> lista_user) {
-
-		Iterator<User> it = lista_user.iterator();
-		User aux = it.next();
-		User media = tree.medianRoles(aux.getRole());
-		double distance = 0;
-		Vector<Double> distances = new Vector<>();
-		Vector<Distance> anomaly_users = new Vector<>();
-
-		while (it.hasNext()) {
-			for (int i = 0; i < media.getHist().length; i++) {
-				distance += Math.pow((aux.getHist()[i] - media.getHist()[i]), 2);
-			}
-
-			distances.add(Math.sqrt(distance));
-			distance = 0;
-			if (it.hasNext()) {
-				aux = it.next();
-			}
-		}
-
-		double iqr = IQR(distances);
-
-		it = lista_user.iterator();
-		while (it.hasNext()) {
-			User aux2 = it.next();
-			for (int i = 0; i < media.getHist().length; i++) {
-				distance += Math.pow((aux2.getHist()[i] - media.getHist()[i]), 2);
-			}
-			if (1.5 * iqr > Math.sqrt(distance)) {
-				Distance dis = new Distance(aux2, Math.sqrt(distance));
-				anomaly_users.add(dis);
-			}
-			distance = 0;
-		}
-
-		order(anomaly_users);
-	}
+	
 	
 	public void order(Vector<Distance> lista_distance) {
 		for(int i = 0; i < lista_distance.size() - 1; i++) {
@@ -201,6 +164,7 @@ public class Analyzer {
 		for (int i = 0; i < media.getHist().length; i++) {
 			distance += Math.pow((user.getHist()[i] - media.getHist()[i]), 2);
 		}
+                
 
 		distance = Math.sqrt(distance);
 		int[] hist = user.getHist();
