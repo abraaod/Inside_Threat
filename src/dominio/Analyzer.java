@@ -151,9 +151,9 @@ public class Analyzer {
 		for(int i = 0; i < lista_distance.size() - 1; i++) {
 			for(int j = i + 1; j < lista_distance.size(); j++) {
 				if(lista_distance.get(i).getDistance() < lista_distance.get(j).getDistance()) {
-					double aux = lista_distance.get(i).getDistance();
-					lista_distance.get(i).setDistance(lista_distance.get(j).getDistance());
-					lista_distance.get(j).setDistance(aux);
+					Distance aux = lista_distance.get(i);
+					lista_distance.insertElementAt(lista_distance.get(j), i);;
+					lista_distance.insertElementAt(aux, j);;
 				}
 			}
 		}
