@@ -54,7 +54,7 @@ public class Analyzer {
 
 			user.setHist(percentageDiagram(hist));
 			return percentageDiagram(hist);
-		}
+		}   
 		return null;
 	}
 

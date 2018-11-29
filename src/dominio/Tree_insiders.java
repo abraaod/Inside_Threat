@@ -264,49 +264,5 @@ public class Tree_insiders {
     }
     
     
-    /*public Vector<Distance> findAnomaly() {
-        Collection<User> lista = hash_user.values();
-		Iterator<User> it = lista.iterator();//lista_user.iterator();
-		User aux = it.next();
-		User media = medianRoles(aux.getRole());
-		double distance = 0;
-		Vector<Double> distances = new Vector<>();
-		Vector<Distance> anomaly_users = new Vector<>();
-
-		while (it.hasNext()) {
-			for (int i = 0; i < media.getHist().length; i++) {
-				distance += Math.pow((aux.getHist()[i] - media.getHist()[i]), 2);
-			}
-                        System.out.println("FOIII!");
-
-			distances.add(Math.sqrt(distance));
-			distance = 0;
-			if (it.hasNext()) {
-				aux = it.next();
-			}
-		}
-                
-                Analyzer an = new Analyzer();
-                
-		double iqr = an.IQR(distances);
-
-		it = lista.iterator();
-		while (it.hasNext()) {
-			User aux2 = it.next();
-			for (int i = 0; i < media.getHist().length; i++) {
-				distance += Math.pow((aux2.getHist()[i] - media.getHist()[i]), 2);
-			}
-			if (1.5 * iqr > Math.sqrt(distance)) {
-				Distance dis = new Distance(aux2, Math.sqrt(distance));
-				anomaly_users.add(dis);
-			}
-			distance = 0;
-		}
-
-		an.order(anomaly_users);
-                System.out.println(anomaly_users);
-                return anomaly_users;
-	}*/
-    
     
 }
