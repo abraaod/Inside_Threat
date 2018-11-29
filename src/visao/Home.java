@@ -735,12 +735,43 @@ public class Home extends javax.swing.JFrame {
     private boolean validardatas() {
         try{
             
+            if(rbTudo.isSelected())
+                return true;
+            
+            
+            String finalDate;
+            String[] dataFi;
             String[] dataIn = txtDataInicio.getText().split("/");
-            String[] dataFi = txtDataFinal.getText().split("/");
+            if(txtDataFinal.getText().equals("")){
+                finalDate = "11/30/2020";
+                dataFi = finalDate.split("/");
+            }else{
+                dataFi = txtDataFinal.getText().split("/");
+            }
             
-            //if(dataIn[3])
+            if(Integer.parseInt(dataIn[2]) <= Integer.parseInt(dataFi[2]) ){
+                if(Integer.parseInt(dataIn[1]) > 0 && Integer.parseInt(dataFi[1]) > 0 &&
+                        Integer.parseInt(dataIn[1]) < 32  && Integer.parseInt(dataFi[1]) < 32 &&
+                        Integer.parseInt(dataIn[0]) <= 12  && Integer.parseInt(dataFi[0]) <= 12 &&
+                        Integer.parseInt(dataIn[0]) > 0  && Integer.parseInt(dataFi[0]) > 0){
+                    if(Integer.parseInt(dataIn[0]) == Integer.parseInt(dataFi[0])){
+                        if(Integer.parseInt(dataIn[1]) <= Integer.parseInt(dataFi[1])){
+                            return true;
+                        } else{
+                            throw new InvalidDate();
+                        }
+                    }
+                    
+                    return true;
+                    
+                } else{
+                    throw new InvalidDate();
+                }
+            } else{
+                throw new InvalidDate();
+            }
         } catch( InvalidDate ex ){
-            
+            JOptionPane.showMessageDialog(this, "Data(s) inválidas.");
         }
         
         return false;
