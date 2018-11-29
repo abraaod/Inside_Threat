@@ -9,6 +9,9 @@ import controle.NullSpecificUser;
 import dominio.Analyzer;
 import dominio.Tree_insiders;
 import dominio.User;
+
+import java.awt.Toolkit;
+
 import javax.swing.JOptionPane;
 import org.jfree.ui.RefineryUtilities;
 
@@ -28,6 +31,12 @@ public class FilterByUser extends javax.swing.JFrame {
      */
     public FilterByUser(Tree_insiders tree) {
         initComponents();
+        try {
+        	setIcon();
+        } catch (NullPointerException ex) {
+        	
+        }
+        setLocationRelativeTo(null);
         this.tree = tree;
     }
 
@@ -122,7 +131,14 @@ public class FilterByUser extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    /**
+     * Modificar o icone da janela.
+     */
+    private void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../res/logokkk.png")));
+    }
+    
     /**
      * Cria os histogramas na árvore, então retorna os dados de usuários
      * específicos e enviar para a classe HistogramLines para gerar os
