@@ -54,6 +54,7 @@ public class Home extends javax.swing.JFrame {
      */
     public Home() {
         initComponents();
+        setLocationRelativeTo(null);
         try {
             setIcon();
         } catch (NullPointerException ex) {
@@ -632,12 +633,6 @@ public class Home extends javax.swing.JFrame {
     private void btnInsidersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInsidersMouseClicked
         try {
             Vector<Distance> lista = tree.analyzerByCategory(txtRoleUser.getText(), true);
-            System.out.println(lista.size() + "Tamanho de insiders");
-            Iterator<Distance> it = lista.iterator();
-            while (it.hasNext()) {
-                Distance aux = it.next();
-                System.out.println(aux.getUser().getName() + " : " + aux.getDistance());
-            }
             Insiders insiders = new Insiders(lista);
             insiders.setVisible(true);
         } catch (ArrayIndexOutOfBoundsException ex) {

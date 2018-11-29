@@ -6,6 +6,8 @@
 package visao;
 
 import dominio.Distance;
+
+import java.awt.Toolkit;
 import java.util.Vector;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
@@ -28,10 +30,19 @@ public class Insiders extends javax.swing.JFrame {
      */
     public Insiders(Vector<Distance> lista) {
         initComponents();
+        try {
+            setIcon();
+        } catch (NullPointerException ex) {
+            //Nothing, it's not important.
+        }
         lista_users = lista;
-        DefaultListModel<Distance> mod = new DefaultListModel<>();
-        for(Distance u : lista){
-            mod.addElement(u);
+        DefaultListModel<String> mod = new DefaultListModel<>();
+        if(lista.size() >= 2) {
+        	for(int i = lista.size() - 1; i >=0; i--) {
+        		mod.addElement(lista.get(i).getUser().getName() + " : " + lista.get(i).getDistance());
+        	}
+        } else {
+        	mod.addElement(lista.get(0).getUser().getName() + " : " + lista.get(0).getDistance());
         }
         list_insiders.setModel(mod);
     }
@@ -51,10 +62,11 @@ public class Insiders extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         list_insiders = new javax.swing.JList<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(java.awt.Color.white);
         setResizable(false);
-
+        setLocationRelativeTo(null);
+        
         jPanel1.setBackground(java.awt.Color.white);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -118,13 +130,17 @@ public class Insiders extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    private void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../res/logokkk.png")));
+    }
 
     private void list_insidersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_list_insidersMouseClicked
         JList thelist = (JList) evt.getSource();
         if(evt.getClickCount() == 1){
             int index = thelist.locationToIndex(evt.getPoint());
             if(index >= 0){
-                Distance d = (Distance) thelist.getModel().getElementAt(index);
+                Distance d = lista_users.get(index);
                 JOptionPane.showMessageDialog(this, 
                         "Desvio: " + d.getDistance() +
                         "\nID: " + d.getUser().getId()+
@@ -143,6 +159,6 @@ public class Insiders extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JList<Distance> list_insiders;
+    private javax.swing.JList<String> list_insiders;
     // End of variables declaration//GEN-END:variables
 }
