@@ -5,16 +5,14 @@
  */
 package controle;
 
-import javax.swing.JOptionPane;
-
 /**
  *
- * @author Henrique
+ * @author henriquedavid
  */
-public class NullSpecificUser extends Exception{
+public class InvalidDate extends Exception{
     
-    public NullSpecificUser(String message){
-        System.err.println(message);
+    public InvalidDate(){
+        System.err.println("Data inválida!");
     }
     
 }

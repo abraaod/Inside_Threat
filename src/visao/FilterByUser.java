@@ -87,7 +87,7 @@ public class FilterByUser extends javax.swing.JFrame {
                                     .addComponent(txtUser1)
                                     .addComponent(txtUser2, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)))
                             .addComponent(btnGerar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,9 +111,7 @@ public class FilterByUser extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,7 +129,7 @@ public class FilterByUser extends javax.swing.JFrame {
      * histogramas visualmente.
      */
     private void btnGerarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGerarMouseClicked
-        tree.createDiagram();
+        //tree.createDiagram();
         try {
             user1 = tree.getSpecificUser(txtUser1.getText());
             user2 = tree.getSpecificUser(txtUser2.getText());

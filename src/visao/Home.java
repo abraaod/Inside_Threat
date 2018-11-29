@@ -5,6 +5,7 @@
  */
 package visao;
 
+import controle.InvalidDate;
 import controle.NullSpecificUser;
 import dominio.Date;
 import dominio.Device;
@@ -53,14 +54,14 @@ public class Home extends javax.swing.JFrame {
      */
     public Home() {
         initComponents();
-        try{
+        try {
             setIcon();
-        } catch(NullPointerException ex){
+        } catch (NullPointerException ex) {
             //Nothing, it's not important.
         }
         tree = new Tree_insiders();
         filereader = new FileReader();
-        
+
         waitCursor = new Cursor(Cursor.WAIT_CURSOR);
         defaultCursor = new Cursor(Cursor.DEFAULT_CURSOR);
 
@@ -472,8 +473,8 @@ public class Home extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * Abre uma caixa de diálogo para selecionar os arquivos que contém 
-     * as informações dos usuários.
+     * Abre uma caixa de diálogo para selecionar os arquivos que contém as
+     * informações dos usuários.
      */
     private void btnSelectFilesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSelectFilesMouseClicked
         if (btnSelectFiles.isEnabled()) {
@@ -514,25 +515,25 @@ public class Home extends javax.swing.JFrame {
      * configurar os estados dos botões.
      */
     private void btnOKUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOKUsersMouseClicked
-
-        if (filesUsers != null && btnOKUsers.isEnabled()) {
+        boolean validas = validardatas();
+        if (filesUsers != null && btnOKUsers.isEnabled() && validas) {
             this.setCursor(waitCursor);
             System.out.println("Começou a ler o LDAP");
-            
+
             String dataInicio = "";
             String dataFinal = "";
-            
-            if(rbPeriodo.isSelected()){
+
+            if (rbPeriodo.isSelected()) {
                 dataInicio = txtDataInicio.getText();
                 dataFinal = txtDataFinal.getText();
-            } else if(rbData.isSelected()){
+            } else if (rbData.isSelected()) {
                 dataInicio = txtDataInicio.getText();
                 dataFinal = txtDataInicio.getText();
             } else {
                 dataInicio = "01/01/1900";
                 dataFinal = "11/25/2018";
             }
-            
+
             for (File f : filesUsers) {
                 filereader.read_ldap(tree, f, dataInicio, dataFinal);
             }
@@ -547,8 +548,8 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_btnOKUsersMouseClicked
 
     /**
-     * Lê os dados de ações dos usuários, como o dispositivo, urls acessadas,
-     * e quais os dispositivos inseridos na máquina.
+     * Lê os dados de ações dos usuários, como o dispositivo, urls acessadas, e
+     * quais os dispositivos inseridos na máquina.
      */
     private void btnEnviarDadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnviarDadosMouseClicked
         if (btnEnviarDados.isEnabled()) {
@@ -576,6 +577,7 @@ public class Home extends javax.swing.JFrame {
                     btnEnviarDados.setEnabled(false);
                     System.out.println("Leitura realizada de tudo!");
                     this.setCursor(defaultCursor);
+                    tree.createDiagram();
                 }
             } catch (NullPointerException ex) {
                 ex.printStackTrace();
@@ -628,16 +630,19 @@ public class Home extends javax.swing.JFrame {
      * uma nova janela para apresentar os dados do resultado.
      */
     private void btnInsidersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInsidersMouseClicked
-    	tree.createDiagram();
-    	Vector<Distance> lista = tree.analyzerByCategory(txtRoleUser.getText(), true);
-        System.out.println(lista.size() + "Tamanho de insiders");
-        Iterator<Distance> it = lista.iterator();
-        while(it.hasNext()) {
-        	Distance aux = it.next();
-        	System.out.println(aux.getUser().getName() + " : " + aux.getDistance());
+        try {
+            Vector<Distance> lista = tree.analyzerByCategory(txtRoleUser.getText(), true);
+            System.out.println(lista.size() + "Tamanho de insiders");
+            Iterator<Distance> it = lista.iterator();
+            while (it.hasNext()) {
+                Distance aux = it.next();
+                System.out.println(aux.getUser().getName() + " : " + aux.getDistance());
+            }
+            Insiders insiders = new Insiders(lista);
+            insiders.setVisible(true);
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            JOptionPane.showMessageDialog(this, "Nome de papel inválido. Verifique o papel.", "Inválido!", JOptionPane.INFORMATION_MESSAGE);
         }
-        Insiders insiders = new Insiders(lista);
-        insiders.setVisible(true);
     }//GEN-LAST:event_btnInsidersMouseClicked
 
     /**
@@ -725,5 +730,19 @@ public class Home extends javax.swing.JFrame {
      */
     private void setIcon() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../res/logokkk.png")));
+    }
+
+    private boolean validardatas() {
+        try{
+            
+            String[] dataIn = txtDataInicio.getText().split("/");
+            String[] dataFi = txtDataFinal.getText().split("/");
+            
+            //if(dataIn[3])
+        } catch( InvalidDate ex ){
+            
+        }
+        
+        return false;
     }
 }

@@ -8,6 +8,8 @@ package visao;
 import dominio.Distance;
 import java.util.Vector;
 import javax.swing.DefaultListModel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -27,9 +29,9 @@ public class Insiders extends javax.swing.JFrame {
     public Insiders(Vector<Distance> lista) {
         initComponents();
         lista_users = lista;
-        DefaultListModel<String> mod = new DefaultListModel<>();
+        DefaultListModel<Distance> mod = new DefaultListModel<>();
         for(Distance u : lista){
-            mod.addElement(u.getUser().getId());
+            mod.addElement(u);
         }
         list_insiders.setModel(mod);
     }
@@ -49,13 +51,23 @@ public class Insiders extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         list_insiders = new javax.swing.JList<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(java.awt.Color.white);
         setResizable(false);
+
+        jPanel1.setBackground(java.awt.Color.white);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Lista de Insiders Threat");
 
+        jPanel2.setBackground(java.awt.Color.white);
+
+        list_insiders.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                list_insidersMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(list_insiders);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -107,12 +119,30 @@ public class Insiders extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void list_insidersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_list_insidersMouseClicked
+        JList thelist = (JList) evt.getSource();
+        if(evt.getClickCount() == 1){
+            int index = thelist.locationToIndex(evt.getPoint());
+            if(index >= 0){
+                Distance d = (Distance) thelist.getModel().getElementAt(index);
+                JOptionPane.showMessageDialog(this, 
+                        "Desvio: " + d.getDistance() +
+                        "\nID: " + d.getUser().getId()+
+                        "\nName: " + d.getUser().getName() +
+                        "\nDomain: " + d.getUser().getDomain() +
+                        "\nEmail: " + d.getUser().getEmail() +
+                        "\nRole: " + d.getUser().getRole(), 
+                        "Informações do usuário", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_list_insidersMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JList<String> list_insiders;
+    private javax.swing.JList<Distance> list_insiders;
     // End of variables declaration//GEN-END:variables
 }
