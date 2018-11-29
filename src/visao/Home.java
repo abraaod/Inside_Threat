@@ -628,6 +628,7 @@ public class Home extends javax.swing.JFrame {
      * uma nova janela para apresentar os dados do resultado.
      */
     private void btnInsidersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInsidersMouseClicked
+    	tree.createDiagram();
     	Vector<Distance> lista = tree.analyzerByCategory(txtRoleUser.getText(), true);
         System.out.println(lista.size() + "Tamanho de insiders");
         Iterator<Distance> it = lista.iterator();

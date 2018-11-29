@@ -7,6 +7,8 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Vector;
 
+import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
+
 /**
  *
  * @author Abraao
@@ -155,11 +157,10 @@ public class Analyzer {
 		for (int i = 0; i < lista_distance.size() - 1; i++) {
 			for (int j = i + 1; j < lista_distance.size(); j++) {
 				if (lista_distance.get(i).getDistance() < lista_distance.get(j).getDistance()) {
+					//System.out.println("rodou aq");
 					Distance aux = lista_distance.get(i);
 					lista_distance.insertElementAt(lista_distance.get(j), i);
-					;
 					lista_distance.insertElementAt(aux, j);
-					;
 				}
 			}
 		}
@@ -176,7 +177,7 @@ public class Analyzer {
 		Iterator<User> it = lista.iterator();// lista_user.iterator();
 		User media = tree.medianRoles(category);
 		double distance = 0;
-		Vector<Double> distances = new Vector<>();
+		double [] distances = new double[lista.size()];
 		Vector<Distance> anomaly_users = new Vector<>();
 		int cont = 0;
 		while (it.hasNext()) {
@@ -185,11 +186,11 @@ public class Analyzer {
 				distance += Math.pow((aux.getHist()[i] - media.getHist()[i]), 2);
 			}
 
-			distances.add(Math.sqrt(distance));
+			distances[cont] = Math.sqrt(distance);
 			distance = 0;
 			cont ++;
 		}
-		System.out.println(cont);
+		
 		double iqr = IQR(distances);
 		cont = 0;
 		it = lista.iterator();
@@ -198,17 +199,17 @@ public class Analyzer {
 			for (int i = 0; i < media.getHist().length; i++) {
 				distance += Math.pow((aux2.getHist()[i] - media.getHist()[i]), 2);
 			}
-			if (1.5 * iqr > Math.sqrt(distance)) {
+			if (Math.sqrt(distance) > iqr) {
 				Distance dis = new Distance(aux2, Math.sqrt(distance));
 				anomaly_users.add(dis);
 			}
 			distance = 0;
 			cont++;
 		}
-		System.out.println(cont + " Final cont");
 		order(anomaly_users);
 		//System.out.println(anomaly_users);
 		return anomaly_users;
+
 	}
 
         /**
@@ -219,7 +220,7 @@ public class Analyzer {
          */
 	public double IQR(int[] hist) {
 
-		Arrays.sort(hist);
+		DescriptiveStatistics da = new DescriptiveStatistics();
 		double Q1 = hist[(hist.length + 1) / 4];
 		double Q3 = hist[(3 * (hist.length + 1)) / 4];
 
@@ -232,12 +233,11 @@ public class Analyzer {
          * @param distance Vetor das distancias em double.
          * @return valor correspondente ao iqr daquela lista.
          */
-	public double IQR(Vector<Double> distance) {
-
-		Arrays.sort(distance.toArray());
-		double Q1 = distance.get((distance.size() + 1) / 4);
-		double Q3 = distance.get((3 * (distance.size() + 1)) / 4);
-
-		return Q3 - Q1;
+	public double IQR(double [] distance) {
+		
+		double [] data = distance;
+		DescriptiveStatistics da = new DescriptiveStatistics(data);
+		double iqr = da.getPercentile(75) - da.getPercentile(25);	
+		return da.getPercentile(75) + (1.5 * (iqr));
 	}
 }
