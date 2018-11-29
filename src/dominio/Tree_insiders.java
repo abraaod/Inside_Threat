@@ -260,9 +260,10 @@ public class Tree_insiders {
                 }
             }
         }
-        
-        for(int i = 0; i < hist.length; i++) {
-        	hist[i] /= qnt;
+        if(qnt > 0) {
+        	 for(int i = 0; i < hist.length; i++) {
+             	hist[i] /= qnt;
+             }
         }
         role_.setHist(hist);
         return role_;
