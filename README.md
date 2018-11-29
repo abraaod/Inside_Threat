@@ -15,5 +15,5 @@ First you'll need to have the Java JDK on your machine. To download it, visit th
 There's a manual on this repository, teaching step-to-step. (only in Portuguese)
 
 # Authors
-Abraao Vitor L. Dantas (abraaovld@gmail.com)
+Abraao Vitor L. Dantas (abraaovld@gmail.com)<br>
 Henrique David de Medeiros (henriquemed101@gmail.com)
