@@ -118,7 +118,7 @@ public class HistogramLines extends JFrame {
         final TimeSeries series = new TimeSeries(user1.getId());
         int[] hist = user1.getHist();
         RegularTimePeriod t = new Hour(0, new Day());
-        for (int i = 0; i < 25; i++) {
+        for (int i = 0; i < 24; i++) {
             series.add(t, hist[i]);
             t = t.next();
         }
