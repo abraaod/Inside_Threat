@@ -12,7 +12,7 @@ First you'll need to have the Java JDK on your machine. To download it, visit th
 - Open the folder with the code on terminal. Code: ```javac *.java``` and then ```java Home```. Done!
 
 # Execute
-There's a manual on this repository, teaching step-to-step.
+There's a manual on this repository, teaching step-to-step. (only in Portuguese)
 
 # Authors
 Abraao Vitor L. Dantas (abraaovld@gmail.com)
