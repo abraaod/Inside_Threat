@@ -146,6 +146,11 @@ public class Analyzer {
 		return collection;
 	}
 
+        /**
+         * Método de ordenação de um vetor.
+         * 
+         * @param lista_distance vetor com todas as distancias a ser ordenadas.
+         */
 	public void order(Vector<Distance> lista_distance) {
 		for (int i = 0; i < lista_distance.size() - 1; i++) {
 			for (int j = i + 1; j < lista_distance.size(); j++) {
@@ -160,6 +165,13 @@ public class Analyzer {
 		}
 	}
 
+        /**
+         * Procurar anomalias de um vetor de usuários em um determinado papel.
+         * 
+         * @param lista Lista com os usuários.
+         * @param category Papel para servir como base para calcular a anomalia.
+         * @return Lista com possíveis infiltrados.
+         */
 	public Vector<Distance> findAnomaly(Vector<User> lista, String category) {
 		Iterator<User> it = lista.iterator();// lista_user.iterator();
 		User media = tree.medianRoles(category);
@@ -199,6 +211,12 @@ public class Analyzer {
 		return anomaly_users;
 	}
 
+        /**
+         * Calcular o IQR de um histograma.
+         * 
+         * @param hist histograma a ser calculado o iqr sobre ele.
+         * @return valor correspondente ao iqr daquele histograma.
+         */
 	public double IQR(int[] hist) {
 
 		Arrays.sort(hist);
@@ -208,6 +226,12 @@ public class Analyzer {
 		return Q3 - Q1;
 	}
 
+        /**
+         * Calcular o IQR de uma lista com as distâncias.
+         * 
+         * @param distance Vetor das distancias em double.
+         * @return valor correspondente ao iqr daquela lista.
+         */
 	public double IQR(Vector<Double> distance) {
 
 		Arrays.sort(distance.toArray());

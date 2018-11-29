@@ -23,8 +23,8 @@ public class FilterByUser extends javax.swing.JFrame {
     User user2;
 
     /**
-     * Creates new form FilterByUser
-     * @param tree
+     * Construtor do JForm.
+     * @param tree árvore criada com a leitura dos dados.
      */
     public FilterByUser(Tree_insiders tree) {
         initComponents();
@@ -125,6 +125,11 @@ public class FilterByUser extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Cria os histogramas na árvore, então retorna os dados de usuários
+     * específicos e enviar para a classe HistogramLines para gerar os
+     * histogramas visualmente.
+     */
     private void btnGerarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGerarMouseClicked
         tree.createDiagram();
         try {
@@ -138,9 +143,6 @@ public class FilterByUser extends javax.swing.JFrame {
                user2 = tree.medianRoles(user1.getRole());
            }
            	
-           	/*Analyzer analyzer = new Analyzer(tree);
-           	analyzer.findAnomaly(user1);*/
-        
             final HistogramLines demo = new HistogramLines("Ações do Usuário", user1, user2);
             demo.pack();
             RefineryUtilities.centerFrameOnScreen(demo);

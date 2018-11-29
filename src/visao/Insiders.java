@@ -17,8 +17,12 @@ public class Insiders extends javax.swing.JFrame {
 
     
     Vector<Distance> lista_users;
+    
     /**
-     * Creates new form Insiders
+     * Cria uma JList para mostrar quem são os infiltrados em um determinado
+     * papel.
+     * 
+     * @param lista Lista com todos os usuários infiltrados.
      */
     public Insiders(Vector<Distance> lista) {
         initComponents();

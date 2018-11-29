@@ -239,6 +239,11 @@ public class Tree_insiders {
         System.out.println(lista.size());
     }
     
+    /**
+     * Calcula a média de um determinado papel.
+     * 
+     * @param role Papel de uma empresa a ser calculada a média.
+     */
     public User medianRoles(String role){
         User role_ = new User("", "Media", "", "", role);
         Collection<User> lista = hash_user.values();

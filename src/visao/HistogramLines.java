@@ -41,11 +41,21 @@ import org.jfree.ui.RectangleInsets;
  *
  * @author Henrique
  */
-public class HistogramLines extends JFrame implements ActionListener {
+public class HistogramLines extends JFrame {
 
     private XYPlot plot;
     private int datasetIndex = 0;
 
+    /**
+     * Construtor do JFrame que irá gerar o histograma visualmente.
+     * Configura um label com o papel de cada pessoa na empresa.
+     * Cria o histograma visual utilizando a API JFreeChart.
+     * 
+     * @param title Título que será atribuido ao frame.
+     * @param user1 Primeiro usuário a ser gerado o histograma.
+     * @param user2 Segundo usuário a ser gerado o histograma, no caso em que
+     * não existe é realizado um usuário média com a média do papel do usuário 1.
+     */
     public HistogramLines(String title, User user1, User user2) {
         super(title);
         String role_ = "Role: ";
@@ -89,6 +99,8 @@ public class HistogramLines extends JFrame implements ActionListener {
         chartPanel.setPreferredSize(new Dimension(1100, 470));
         setContentPane(content);
 
+        // Em caso de haver mais de um usuário é necessário criar uma base
+        // de dados para ele também.
         if (user2 != null) {
             this.plot.setDataset(1, createDatabase(user2));
         }
@@ -98,21 +110,20 @@ public class HistogramLines extends JFrame implements ActionListener {
 
     }
 
+    /**
+     * Criar uma nova base de dados com apenas os histogramas distribuidos
+     * entre horários específicos, ou seja, entre 00:00 e 23:59.
+     */
     private TimeSeriesCollection createDatabase(User user1) {
         final TimeSeries series = new TimeSeries(user1.getId());
         int[] hist = user1.getHist();
         RegularTimePeriod t = new Hour(0, new Day());
-        for (int i = 0; i < 24; i++) {
+        for (int i = 0; i < 25; i++) {
             series.add(t, hist[i]);
             t = t.next();
         }
 
         return new TimeSeriesCollection(series);
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

@@ -47,7 +47,9 @@ public class Home extends javax.swing.JFrame {
     private Cursor defaultCursor;
 
     /**
-     * Creates new form Home
+     * Cria novo JForm, além de adicionar o icone e realizar as configurações
+     * iniciais como inicializar a árvore e o leitor dos arquivos; configurar os
+     * cursores e o estado de acesso de cada botão.
      */
     public Home() {
         initComponents();
@@ -470,7 +472,8 @@ public class Home extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * Open a JFrame to select multiple files about the Users informations.
+     * Abre uma caixa de diálogo para selecionar os arquivos que contém 
+     * as informações dos usuários.
      */
     private void btnSelectFilesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSelectFilesMouseClicked
         if (btnSelectFiles.isEnabled()) {
@@ -488,7 +491,8 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSelectFilesMouseClicked
 
     /**
-     * Open a JFrame to select multiple files about others informations.
+     * Abre uma caixa de diálogo para selecionar os arquivos contendo as ações
+     * de cada usuário.
      */
     private void btnUtilizacaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUtilizacaoMouseClicked
         if (btnUtilizacao.isEnabled()) {
@@ -505,7 +509,9 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUtilizacaoMouseClicked
 
     /**
-     * Read the LDAP files and switch the buttons enabled.
+     * Botão para a realização da leitura das informações dos usuários
+     * selecionadas, assim como a lógica pelo sistema de datas. Além de
+     * configurar os estados dos botões.
      */
     private void btnOKUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOKUsersMouseClicked
 
@@ -541,7 +547,8 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_btnOKUsersMouseClicked
 
     /**
-     * Read each information about the others data then users information.
+     * Lê os dados de ações dos usuários, como o dispositivo, urls acessadas,
+     * e quais os dispositivos inseridos na máquina.
      */
     private void btnEnviarDadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnviarDadosMouseClicked
         if (btnEnviarDados.isEnabled()) {
@@ -578,6 +585,10 @@ public class Home extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnEnviarDadosMouseClicked
 
+    /**
+     * Configurar os estados de inserção nas caixas de textos, caso selecionado
+     * o período entre datas.
+     */
     private void rbPeriodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbPeriodoActionPerformed
         txtDataFinal.setEnabled(true);
         txtDataInicio.setEnabled(true);
@@ -585,24 +596,38 @@ public class Home extends javax.swing.JFrame {
         lblDataInicio.setText("Data (início):");
     }//GEN-LAST:event_rbPeriodoActionPerformed
 
+    /**
+     * Configurar os estados de inserção nas caixas de textos, caso selecionado
+     * tudo.
+     */
     private void rbTudoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbTudoActionPerformed
         txtDataFinal.setEnabled(false);
         txtDataInicio.setEnabled(false);
     }//GEN-LAST:event_rbTudoActionPerformed
 
+    /**
+     * Configurar os estados de inserção nas caixas de textos, caso selecionado
+     * uma data específica.
+     */
     private void rbDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbDataActionPerformed
         txtDataFinal.setEnabled(false);
         txtDataInicio.setEnabled(true);
         lblDataInicio.setText("Data:");
     }//GEN-LAST:event_rbDataActionPerformed
 
+    /**
+     * Inicializar uma nova janela.
+     */
     private void btnNextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNextMouseClicked
         FilterByUser frame = new FilterByUser(tree);
         frame.setVisible(true);
     }//GEN-LAST:event_btnNextMouseClicked
 
+    /**
+     * Realizar a busca por um infiltrado em um papel específico. E inicializar
+     * uma nova janela para apresentar os dados do resultado.
+     */
     private void btnInsidersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInsidersMouseClicked
-        //colocar a string do papel que se deseja pesquisar
     	Vector<Distance> lista = tree.analyzerByCategory(txtRoleUser.getText(), true);
         System.out.println(lista.size() + "Tamanho de insiders");
         Iterator<Distance> it = lista.iterator();
@@ -694,6 +719,9 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JTextField txtRoleUser;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Modificar o icone da janela.
+     */
     private void setIcon() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../res/logokkk.png")));
     }
